@@ -1,0 +1,38 @@
+﻿@model MVCGaleno.Models.TurnoViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create2">
+    <div class="form-horizontal">
+        <h4>Turno</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="IdAfiliado" class="control-label"></label>
+            <input asp-for="IdAfiliado" class="form-control" readonly />
+            <span asp-validation-for="IdAfiliado" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group">
+            <label asp-for="IdPrestador" class="control-label"></label>
+            <input asp-for="IdPrestador" class="form-control" readonly />
+            <span asp-validation-for="IdPrestador" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Especialidad" class="control-label"></label>
+            <input asp-for="Especialidad" class="form-control" readonly />
+            <span asp-validation-for="Especialidad" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<MVCGaleno.Models.Cita>
+
+@{
+    ViewData["Title"] = "Select Cita";
+}
+
+<h2>Select Cita</h2>
+
+<form asp-action="SelectCita2" method="post">
+    <div class="form-group">
+        <label for="idCita">Cita</label>
+        <select id="idCita" name="idCita" class="form-control">
+            <option value="">Please select</option>
+            @foreach (var cita in Model)
+            {
+                <option value="@cita.IdCita">@cita.fechaCita</option>
+                
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Next</button>
+</form>
+

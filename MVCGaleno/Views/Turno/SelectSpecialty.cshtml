@@ -1,0 +1,21 @@
+﻿@model IEnumerable<MVCGaleno.Models.Especialidad>
+@{
+    ViewData["Title"] = "Select Specialty";
+}
+
+<h2>Select Specialty</h2>
+
+<form asp-action="SelectSpecialty" method="post">
+    <div class="form-group">
+        <label for="especialidad">Especialidad</label>
+        <select id="especialidad" name="especialidad" class="form-control">
+            <option value="">Please select</option>
+            @foreach (var specialty in Model)
+            {
+                <option value="@specialty">@specialty</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Next</button>
+</form>
+

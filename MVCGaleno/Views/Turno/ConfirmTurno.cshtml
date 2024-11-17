@@ -1,0 +1,16 @@
+﻿@model MVCGaleno.Models.ConfirmTurnoViewModel
+
+@{
+    ViewData["Title"] = "Confirm Turno";
+}
+
+<h2>Confirm Turno</h2>
+
+<form asp-action="ConfirmTurno" method="post">
+    <input type="hidden" asp-for="IdCita" />
+    <div class="form-group">
+        <label asp-for="Dni"></label>
+        <input asp-for="Dni" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Confirm</button>
+</form>
