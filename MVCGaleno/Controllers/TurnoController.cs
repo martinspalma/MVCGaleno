@@ -106,7 +106,7 @@ namespace MVCGaleno.Controllers
                 IdAfiliado = afiliado.IdAfiliado,
                 IdPrestador = prestadorMedico.IdPrestador, 
                 Especialidad = prestadorMedico.Especialidad,
-                FechaCita= cita.fechaCita.ToString("yyyy-MM-dd HH:mm:ss")
+                FechaCita= cita.fechaCita
                 //string fechaComoString = fechaActual
             };
             return RedirectToAction("Create", turnoViewModel);
