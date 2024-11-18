@@ -4,6 +4,7 @@ using MVCGaleno.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCGaleno.Migrations
 {
     [DbContext(typeof(GalenoDatabaseContext))]
-    partial class GalenoDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20241118034222_incorporaFechaCitaATurno")]
+    partial class incorporaFechaCitaATurno
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,9 +135,8 @@ namespace MVCGaleno.Migrations
                     b.Property<int>("PrestadorMedicoIdPrestador")
                         .HasColumnType("int");
 
-                    b.Property<string>("fechaCita")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("fechaCita")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("IdTurno");
 

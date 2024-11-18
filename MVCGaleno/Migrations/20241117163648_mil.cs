@@ -10,7 +10,8 @@ namespace MVCGaleno.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
+            
+           migrationBuilder.DropForeignKey(
                 name: "FK_Citas_Medicos_prestadorMedicoIdPrestador",
                 table: "Citas");
 

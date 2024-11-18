@@ -105,7 +105,9 @@ namespace MVCGaleno.Controllers
                 IdCita = model.IdCita,
                 IdAfiliado = afiliado.IdAfiliado,
                 IdPrestador = prestadorMedico.IdPrestador, 
-                Especialidad = prestadorMedico.Especialidad
+                Especialidad = prestadorMedico.Especialidad,
+                FechaCita= cita.fechaCita.ToString("yyyy-MM-dd HH:mm:ss")
+                //string fechaComoString = fechaActual
             };
             return RedirectToAction("Create", turnoViewModel);
 
@@ -132,6 +134,7 @@ namespace MVCGaleno.Controllers
             {
                 var turno = new Turno
                 {
+                    fechaCita= turnoViewModel.FechaCita,
                     PrestadorMedico = _context.Medicos.FirstOrDefault(m => m.IdPrestador == turnoViewModel.IdPrestador),
                     Afiliado = _context.Afiliados.FirstOrDefault(a => a.IdAfiliado == turnoViewModel.IdAfiliado),             
                     Especialidad = turnoViewModel.Especialidad
@@ -215,7 +218,16 @@ namespace MVCGaleno.Controllers
 
             return View(turno);
         }
+        public async Task<IActionResult> Index()
+        {
+            var turnos = await _context.Turnos
+                .Include(t => t.PrestadorMedico)  // Incluir el Prestador Médico
+                .Include(t => t.Afiliado)         // Incluir el Afiliado
+                .Include(t => t.PrestadorMedico.Citas)             // Incluir las Citas
+                .ToListAsync();
 
+            return View(turnos);
+        }
         // POST: Turno/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -236,10 +248,7 @@ namespace MVCGaleno.Controllers
             return _context.Turnos.Any(e => e.IdTurno == id);
         }
         // GET: Turno
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Turnos.ToListAsync());
-        }
+        
 
         // GET: Turno/Details/5
         public async Task<IActionResult> Details(int? id)
