@@ -1,8 +1,38 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Pagina Principal";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <!-- Título Principal -->
+    <h1 class="display-4" style="color: #007bff; font-weight: bold;">MVCGaleno</h1>
+    <p class="lead" style="color: #6c757d; font-size: 1.2rem;">
+        Tu plataforma confiable para gestionar turnos médicos de manera eficiente y sencilla.
+    </p>
+
+    <!-- Imagen o Banner -->
+    <div style="margin: 20px auto; max-width: 800px;">
+        <img src="https://via.placeholder.com/800x300?text=Bienvenido+a+MVCGaleno"
+             alt="Banner MVCGaleno" class="img-fluid rounded shadow">
+    </div>
+
+    <!-- Botones principales -->
+    <div class="mt-4">
+        <a href="/Afiliado" class="btn btn-primary btn-lg m-2">
+            Gestionar Afiliados
+        </a>
+        <a href="/Turno" class="btn btn-success btn-lg m-2">
+            Ver Turnos Disponibles
+        </a>
+        <a href="/PrestadorMedico" class="btn btn-info btn-lg m-2">
+            Lista de Prestadores
+        </a>
+    </div>
+
+    <!-- Información Adicional -->
+    <div class="mt-5">
+        <p style="color: #6c757d;">
+            Aprende más sobre cómo construir aplicaciones web con
+            <a href="https://learn.microsoft.com/aspnet/core" target="_blank">ASP.NET Core</a>.
+        </p>
+    </div>
 </div>

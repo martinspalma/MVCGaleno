@@ -22,8 +22,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        <!-- Turno -->
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Turno" asp-action="Index">Turno</a>
+                        </li>
+                        <!-- Afiliado -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Afiliado" asp-action="Index">Afiliado</a>
+                        </li>
+                        <!-- PrestadorMedico -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="PrestadorMedico" asp-action="Index">PrestadorMedico</a>
                         </li>
                     </ul>
                 </div>
@@ -45,5 +54,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+   
+
 </body>
 </html>

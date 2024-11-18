@@ -85,6 +85,13 @@ namespace MVCGaleno.Controllers
                 ModelState.AddModelError("", "Cita no disponible.");
                 return View(model);
             }
+            /*else
+            {
+                cita.estaDisponible = false;
+
+                _context.SaveChangesAsync();
+            }
+            */
             var prestadorMedico = _context.Medicos.FirstOrDefault(m => m.IdPrestador == cita.IdPrestador);
             if (prestadorMedico == null)
             {
@@ -92,7 +99,7 @@ namespace MVCGaleno.Controllers
                 return View(model);
             }
 
-            cita.estaDisponible = false;
+           
             var turnoViewModel = new TurnoViewModel
             {
                 IdCita = model.IdCita,
@@ -129,14 +136,16 @@ namespace MVCGaleno.Controllers
                     Afiliado = _context.Afiliados.FirstOrDefault(a => a.IdAfiliado == turnoViewModel.IdAfiliado),             
                     Especialidad = turnoViewModel.Especialidad
                 };
-                
+
                 _context.Add(turno);
-               
                 _context.SaveChangesAsync();
+
+
                 return RedirectToAction(nameof(Index));
             }
             return View(turnoViewModel);
         }
+
 
         // GET: Turno/Edit/5
         public async Task<IActionResult> Edit(int? id)
