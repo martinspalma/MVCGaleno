@@ -11,8 +11,20 @@
     <h4>Turno</h4>
     <hr />
     <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Especialidad)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Especialidad)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fechaCita)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fechaCita)
+        </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdTurno" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |

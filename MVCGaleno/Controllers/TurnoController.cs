@@ -18,6 +18,7 @@ namespace MVCGaleno.Controllers
         {
             _context = context;
         }
+
         // GET: Turno/SelectSpecialty 
         public IActionResult SelectSpecialty()
         {
@@ -59,7 +60,7 @@ namespace MVCGaleno.Controllers
         {
             return RedirectToAction("ConfirmTurno", new { idCita });
         }
-        
+
 
         // GET: Turno/ConfirmTurno
         public IActionResult ConfirmTurno(int idCita)
@@ -67,7 +68,7 @@ namespace MVCGaleno.Controllers
             var model = new ConfirmTurnoViewModel { IdCita = idCita };
             return View(model);
         }
-       
+
         // POST: Turno/ConfirmTurno
         [HttpPost]
         public IActionResult ConfirmTurno(ConfirmTurnoViewModel model)
@@ -99,49 +100,47 @@ namespace MVCGaleno.Controllers
                 return View(model);
             }
 
-           
+
             var turnoViewModel = new TurnoViewModel
             {
                 IdCita = model.IdCita,
                 IdAfiliado = afiliado.IdAfiliado,
-                IdPrestador = prestadorMedico.IdPrestador, 
+                IdPrestador = prestadorMedico.IdPrestador,
                 Especialidad = prestadorMedico.Especialidad,
-                FechaCita= cita.fechaCita
-                //string fechaComoString = fechaActual
+                FechaCita = cita.fechaCita
+
             };
             return RedirectToAction("Create", turnoViewModel);
 
-           
-             
-                       
-        }    
-        
-        
+
+
+        }
+
         // GET: Turno/Create
         public IActionResult Create(TurnoViewModel turnoViewModel)
         {
             return View(turnoViewModel);
         }
-       
+
         // POST: Turno/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create2 (TurnoViewModel turnoViewModel)
+        public async Task<IActionResult> Create2(TurnoViewModel turnoViewModel)
         {
             if (ModelState.IsValid)
             {
                 var turno = new Turno
                 {
-                    fechaCita= turnoViewModel.FechaCita,
+                    fechaCita = turnoViewModel.FechaCita,
                     PrestadorMedico = _context.Medicos.FirstOrDefault(m => m.IdPrestador == turnoViewModel.IdPrestador),
-                    Afiliado = _context.Afiliados.FirstOrDefault(a => a.IdAfiliado == turnoViewModel.IdAfiliado),             
+                    Afiliado = _context.Afiliados.FirstOrDefault(a => a.IdAfiliado == turnoViewModel.IdAfiliado),
                     Especialidad = turnoViewModel.Especialidad
                 };
 
                 _context.Add(turno);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
 
                 return RedirectToAction(nameof(Index));
@@ -150,7 +149,27 @@ namespace MVCGaleno.Controllers
         }
 
 
-        // GET: Turno/Edit/5
+        // GET: Turnoes/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var turno = await _context.Turnos
+                .FirstOrDefaultAsync(m => m.IdTurno == id);
+            if (turno == null)
+            {
+                return NotFound();
+            }
+
+            return View(turno);
+        }
+
+
+
+        // GET: Turnoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -165,13 +184,19 @@ namespace MVCGaleno.Controllers
             }
             return View(turno);
         }
+        // GET: Turno/Index
+        public IActionResult Index()
+        {
+            var turnos = _context.Turnos.Include(t => t.PrestadorMedico).Include(t => t.Afiliado).ToList();
+            return View(turnos);
+        }
 
-        // POST: Turno/Edit/5
+        // POST: Turnoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTurno")] Turno turno)
+        public async Task<IActionResult> Edit(int id, [Bind("IdTurno,Especialidad,fechaCita")] Turno turno)
         {
             if (id != turno.IdTurno)
             {
@@ -201,7 +226,7 @@ namespace MVCGaleno.Controllers
             return View(turno);
         }
 
-        // GET: Turno/Delete/5
+        // GET: Turnoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -218,18 +243,8 @@ namespace MVCGaleno.Controllers
 
             return View(turno);
         }
-        /*public async Task<IActionResult> Index()
-        {
-            var turnos = await _context.Turnos
-                .Include(t => t.PrestadorMedico)  // Incluir el Prestador Médico
-                .Include(t => t.Afiliado)         // Incluir el Afiliado
-                .Include(t => t.PrestadorMedico.Citas)             // Incluir las Citas
-                .ToListAsync();
 
-            return View(turnos);
-        }
-        */
-        // POST: Turno/Delete/5
+        // POST: Turnoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -248,26 +263,5 @@ namespace MVCGaleno.Controllers
         {
             return _context.Turnos.Any(e => e.IdTurno == id);
         }
-        // GET: Turno
-        
-
-        // GET: Turno/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var turno = await _context.Turnos
-                .FirstOrDefaultAsync(m => m.IdTurno == id);
-            if (turno == null)
-            {
-                return NotFound();
-            }
-
-            return View(turno);
-        }
-
     }
 }

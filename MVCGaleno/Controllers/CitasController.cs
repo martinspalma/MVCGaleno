@@ -22,7 +22,8 @@ namespace MVCGaleno.Controllers
         // GET: Citas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Citas.ToListAsync());
+            var galenosDatabaseContext = _context.Citas.Include(c => c.PrestadorMedico);
+            return View(await galenosDatabaseContext.ToListAsync());
         }
 
         // GET: Citas/Details/5
@@ -34,6 +35,7 @@ namespace MVCGaleno.Controllers
             }
 
             var cita = await _context.Citas
+                .Include(c => c.PrestadorMedico)
                 .FirstOrDefaultAsync(m => m.IdCita == id);
             if (cita == null)
             {
@@ -46,6 +48,7 @@ namespace MVCGaleno.Controllers
         // GET: Citas/Create
         public IActionResult Create()
         {
+            ViewData["IdPrestador"] = new SelectList(_context.Medicos, "IdPrestador", "IdPrestador");
             return View();
         }
 
@@ -54,21 +57,16 @@ namespace MVCGaleno.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCita,fechaCita,estaDisponible, IdPrestador, PrestadorMedico")] Cita cita)
+        public async Task<IActionResult> Create([Bind("IdCita,fechaCita,estaDisponible,IdPrestador")] Cita cita)
         {
-            var aCargar = new Cita {
-                
-                fechaCita = cita.fechaCita,
-                estaDisponible = cita.estaDisponible, 
-                IdPrestador = cita.IdPrestador,
-               PrestadorMedico = _context.Medicos.FirstOrDefault(m => m.IdPrestador == cita.IdPrestador)
-            };
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _context.Add(aCargar);
+                _context.Add(cita);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdPrestador"] = new SelectList(_context.Medicos, "IdPrestador", "IdPrestador", cita.IdPrestador);
             return View(cita);
         }
 
@@ -85,6 +83,7 @@ namespace MVCGaleno.Controllers
             {
                 return NotFound();
             }
+            ViewData["IdPrestador"] = new SelectList(_context.Medicos, "IdPrestador", "IdPrestador", cita.IdPrestador);
             return View(cita);
         }
 
@@ -93,7 +92,7 @@ namespace MVCGaleno.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCita,fechaCita,estaDisponible")] Cita cita)
+        public async Task<IActionResult> Edit(int id, [Bind("IdCita,fechaCita,estaDisponible,IdPrestador")] Cita cita)
         {
             if (id != cita.IdCita)
             {
@@ -120,6 +119,7 @@ namespace MVCGaleno.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdPrestador"] = new SelectList(_context.Medicos, "IdPrestador", "IdPrestador", cita.IdPrestador);
             return View(cita);
         }
 
@@ -132,6 +132,7 @@ namespace MVCGaleno.Controllers
             }
 
             var cita = await _context.Citas
+                .Include(c => c.PrestadorMedico)
                 .FirstOrDefaultAsync(m => m.IdCita == id);
             if (cita == null)
             {
@@ -160,5 +161,6 @@ namespace MVCGaleno.Controllers
         {
             return _context.Citas.Any(e => e.IdCita == id);
         }
+
     }
 }

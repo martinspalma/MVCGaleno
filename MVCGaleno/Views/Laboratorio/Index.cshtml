@@ -1,0 +1,47 @@
+﻿@model MVCGaleno.Models.Laboratorio
+
+@{
+    ViewData["Title"] = "Laboratorio";
+    var especialidades = Enum.GetValues(typeof(Especialidad)).Cast<Especialidad>().ToList();
+}
+
+<h2>Laboratorio - Subir Resultados de Estudios</h2>
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.Mensaje
+    </div>
+}
+
+<form asp-action="SubirEstudio" asp-controller="Laboratorio" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label asp-for="Especialidad" class="form-label"></label>
+        @Html.DropDownListFor(
+                 model => model.Especialidad,
+                 new SelectList(especialidades),
+                 "Seleccionar Especialidad",
+                 new { @class = "form-control" }
+                 )
+        <span asp-validation-for="Especialidad" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PrestadorMedico" class="form-label"></label>
+        <input asp-for="PrestadorMedico" class="form-control" />
+        <span asp-validation-for="PrestadorMedico" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ArchivoEstudio" class="form-label">Seleccionar Archivo (PDF)</label>
+        <input type="file" asp-for="ArchivoEstudio" class="form-control" />
+        <span asp-validation-for="ArchivoEstudio" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Subir Estudio</button>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

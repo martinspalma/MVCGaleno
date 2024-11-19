@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using MVCGaleno.Context;
 
 namespace MVCGaleno
@@ -10,7 +9,9 @@ namespace MVCGaleno
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<GalenoDatabaseContext>(options => options.UseSqlServer(builder.Configuration["ConnectionString:GalenoDBConnection"]));
+
+            builder.Services.AddDbContext<GalenoDatabaseContext>(options => options.UseSqlServer(builder.Configuration["ConnectionString:GalenosDBConnection"]));
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -24,18 +25,31 @@ namespace MVCGaleno
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            _ = app.UseEndpoints(endpoints =>
+            {
+                _ = endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.Run();
+
         }
     }
 }

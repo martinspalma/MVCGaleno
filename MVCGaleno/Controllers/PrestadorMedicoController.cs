@@ -19,13 +19,13 @@ namespace MVCGaleno.Controllers
             _context = context;
         }
 
-        // GET: PrestadorMedico
+        // GET: PrestadorMedicoes
         public async Task<IActionResult> Index()
         {
             return View(await _context.Medicos.ToListAsync());
         }
 
-        // GET: PrestadorMedico/Details/5
+        // GET: PrestadorMedicoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,13 +43,13 @@ namespace MVCGaleno.Controllers
             return View(prestadorMedico);
         }
 
-        // GET: PrestadorMedico/Create
+        // GET: PrestadorMedicoes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: PrestadorMedico/Create
+        // POST: PrestadorMedicoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -65,7 +65,7 @@ namespace MVCGaleno.Controllers
             return View(prestadorMedico);
         }
 
-        // GET: PrestadorMedico/Edit/5
+        // GET: PrestadorMedicoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,7 +81,7 @@ namespace MVCGaleno.Controllers
             return View(prestadorMedico);
         }
 
-        // POST: PrestadorMedico/Edit/5
+        // POST: PrestadorMedicoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -116,7 +116,7 @@ namespace MVCGaleno.Controllers
             return View(prestadorMedico);
         }
 
-        // GET: PrestadorMedico/Delete/5
+        // GET: PrestadorMedicoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +134,7 @@ namespace MVCGaleno.Controllers
             return View(prestadorMedico);
         }
 
-        // POST: PrestadorMedico/Delete/5
+        // POST: PrestadorMedicoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

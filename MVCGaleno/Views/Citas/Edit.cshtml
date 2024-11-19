@@ -24,6 +24,11 @@
                 </label>
             </div>
             <div class="form-group">
+                <label asp-for="IdPrestador" class="control-label"></label>
+                <select asp-for="IdPrestador" class="form-control" asp-items="ViewBag.IdPrestador"></select>
+                <span asp-validation-for="IdPrestador" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -35,5 +40,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

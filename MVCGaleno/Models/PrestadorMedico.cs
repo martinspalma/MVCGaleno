@@ -17,12 +17,8 @@ namespace MVCGaleno.Models
         public string MailMedico { get; set; }
         public int TelefonoMedico { get; set; }
         public string DireccionMedico { get; set; }
-
-       
-
-
-
     }
-
-
 }
+
+
+  

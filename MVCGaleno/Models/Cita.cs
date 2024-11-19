@@ -18,8 +18,6 @@ namespace MVCGaleno.Models
         public int IdPrestador { get; set; }
 
         public PrestadorMedico? PrestadorMedico { get; set; }
-        
 
     }
 }
-

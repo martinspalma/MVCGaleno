@@ -8,7 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using MVCGaleno.Context;
 using MVCGaleno.Models;
 
-namespace MVCGaleno.Controllers
+
+namespace MVCGalenos.Controllers
 {
     public class AfiliadoController : Controller
     {
@@ -154,4 +155,5 @@ namespace MVCGaleno.Controllers
             return _context.Afiliados.Any(e => e.IdAfiliado == id);
         }
     }
+
 }

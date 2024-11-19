@@ -20,6 +20,6 @@ namespace MVCGaleno.Models
         [Required]
         public Afiliado Afiliado { get; set; }
 
-        public DateTime fechaCita { get; set; }
+        public DateTime? fechaCita { get; set; }
     }
 }
