@@ -10,7 +10,7 @@ namespace MVCGaleno
             var builder = WebApplication.CreateBuilder(args);
 
 
-            builder.Services.AddDbContext<GalenoDatabaseContext>(options => options.UseSqlServer(builder.Configuration["ConnectionString:GalenosDBConnection"]));
+            builder.Services.AddDbContext<GalenoDatabaseContext>(options => options.UseSqlServer(builder.Configuration["ConnectionString:GalenoDBConnection"]));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

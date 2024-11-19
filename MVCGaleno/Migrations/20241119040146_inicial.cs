@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MVCGaleno.Migrations
 {
     /// <inheritdoc />
-    public partial class primera : Migration
+    public partial class inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,14 +54,14 @@ namespace MVCGaleno.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     fechaCita = table.Column<DateTime>(type: "datetime2", nullable: false),
                     estaDisponible = table.Column<bool>(type: "bit", nullable: false),
-                    prestadorMedicoIdPrestador = table.Column<int>(type: "int", nullable: false)
+                    IdPrestador = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Citas", x => x.IdCita);
                     table.ForeignKey(
-                        name: "FK_Citas_Medicos_prestadorMedicoIdPrestador",
-                        column: x => x.prestadorMedicoIdPrestador,
+                        name: "FK_Citas_Medicos_IdPrestador",
+                        column: x => x.IdPrestador,
                         principalTable: "Medicos",
                         principalColumn: "IdPrestador",
                         onDelete: ReferentialAction.Cascade);
@@ -73,8 +73,10 @@ namespace MVCGaleno.Migrations
                 {
                     IdTurno = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Especialidad = table.Column<int>(type: "int", nullable: false),
                     PrestadorMedicoIdPrestador = table.Column<int>(type: "int", nullable: false),
-                    AfiliadoIdAfiliado = table.Column<int>(type: "int", nullable: false)
+                    AfiliadoIdAfiliado = table.Column<int>(type: "int", nullable: false),
+                    fechaCita = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,9 +96,9 @@ namespace MVCGaleno.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Citas_prestadorMedicoIdPrestador",
+                name: "IX_Citas_IdPrestador",
                 table: "Citas",
-                column: "prestadorMedicoIdPrestador");
+                column: "IdPrestador");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Turnos_AfiliadoIdAfiliado",

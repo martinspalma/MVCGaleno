@@ -129,7 +129,7 @@ namespace MVCGaleno.Migrations
                     b.Property<int>("PrestadorMedicoIdPrestador")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("fechaCita")
+                    b.Property<DateTime?>("fechaCita")
                         .HasColumnType("datetime2");
 
                     b.HasKey("IdTurno");
@@ -144,7 +144,7 @@ namespace MVCGaleno.Migrations
             modelBuilder.Entity("MVCGaleno.Models.Cita", b =>
                 {
                     b.HasOne("MVCGaleno.Models.PrestadorMedico", "PrestadorMedico")
-                        .WithMany("Citas")
+                        .WithMany()
                         .HasForeignKey("IdPrestador")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -169,11 +169,6 @@ namespace MVCGaleno.Migrations
                     b.Navigation("Afiliado");
 
                     b.Navigation("PrestadorMedico");
-                });
-
-            modelBuilder.Entity("MVCGaleno.Models.PrestadorMedico", b =>
-                {
-                    b.Navigation("Citas");
                 });
 #pragma warning restore 612, 618
         }
