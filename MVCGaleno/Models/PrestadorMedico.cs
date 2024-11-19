@@ -18,7 +18,7 @@ namespace MVCGaleno.Models
         public int TelefonoMedico { get; set; }
         public string DireccionMedico { get; set; }
 
-        public List<Cita>? Citas { get; set; }
+       
 
 
 

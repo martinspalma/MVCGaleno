@@ -4,6 +4,7 @@ using MVCGaleno.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCGaleno.Migrations
 {
     [DbContext(typeof(GalenoDatabaseContext))]
-    partial class GalenoDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20241118171113_sinFKforzada")]
+    partial class sinFKforzada
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,6 +67,9 @@ namespace MVCGaleno.Migrations
                     b.Property<int>("IdPrestador")
                         .HasColumnType("int");
 
+                    b.Property<int>("PrestadorMedicoIdPrestador")
+                        .HasColumnType("int");
+
                     b.Property<bool>("estaDisponible")
                         .HasColumnType("bit");
 
@@ -72,7 +78,7 @@ namespace MVCGaleno.Migrations
 
                     b.HasKey("IdCita");
 
-                    b.HasIndex("IdPrestador");
+                    b.HasIndex("PrestadorMedicoIdPrestador");
 
                     b.ToTable("Citas");
                 });
@@ -145,7 +151,7 @@ namespace MVCGaleno.Migrations
                 {
                     b.HasOne("MVCGaleno.Models.PrestadorMedico", "PrestadorMedico")
                         .WithMany("Citas")
-                        .HasForeignKey("IdPrestador")
+                        .HasForeignKey("PrestadorMedicoIdPrestador")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

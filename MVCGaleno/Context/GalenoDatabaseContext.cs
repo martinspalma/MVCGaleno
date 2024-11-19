@@ -13,9 +13,12 @@ namespace MVCGaleno.Context
         {
         }
         public DbSet<Afiliado> Afiliados { get; set; }
+        public DbSet<Turno> Turnos { get; set; }
         public DbSet<PrestadorMedico> Medicos { get; set; }
         public DbSet<Cita> Citas { get; set; }
-        public DbSet<Turno> Turnos { get; set; }
+       
+        
+
     }
 }
 

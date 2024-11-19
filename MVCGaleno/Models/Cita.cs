@@ -14,7 +14,11 @@ namespace MVCGaleno.Models
 
         public Boolean estaDisponible { get; set; }
 
+        [ForeignKey("PrestadorMedico")]
         public int IdPrestador { get; set; }
+
+        public PrestadorMedico? PrestadorMedico { get; set; }
+        
 
     }
 }

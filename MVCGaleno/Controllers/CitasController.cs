@@ -54,11 +54,18 @@ namespace MVCGaleno.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCita,fechaCita,estaDisponible, IdPrestador")] Cita cita)
+        public async Task<IActionResult> Create([Bind("IdCita,fechaCita,estaDisponible, IdPrestador, PrestadorMedico")] Cita cita)
         {
-            if (ModelState.IsValid)
+            var aCargar = new Cita {
+                
+                fechaCita = cita.fechaCita,
+                estaDisponible = cita.estaDisponible, 
+                IdPrestador = cita.IdPrestador,
+               PrestadorMedico = _context.Medicos.FirstOrDefault(m => m.IdPrestador == cita.IdPrestador)
+            };
+                if (ModelState.IsValid)
             {
-                _context.Add(cita);
+                _context.Add(aCargar);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

@@ -218,7 +218,7 @@ namespace MVCGaleno.Controllers
 
             return View(turno);
         }
-        public async Task<IActionResult> Index()
+        /*public async Task<IActionResult> Index()
         {
             var turnos = await _context.Turnos
                 .Include(t => t.PrestadorMedico)  // Incluir el Prestador Médico
@@ -228,6 +228,7 @@ namespace MVCGaleno.Controllers
 
             return View(turnos);
         }
+        */
         // POST: Turno/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
