@@ -107,7 +107,8 @@ namespace MVCGaleno.Controllers
                 IdAfiliado = afiliado.IdAfiliado,
                 IdPrestador = prestadorMedico.IdPrestador,
                 Especialidad = prestadorMedico.Especialidad,
-                FechaCita = cita.fechaCita
+                FechaCita = cita.fechaCita.ToString("dd-MM-yy HH:mm")
+                
 
             };
             return RedirectToAction("Create", turnoViewModel);
@@ -133,7 +134,7 @@ namespace MVCGaleno.Controllers
             {
                 var turno = new Turno
                 {
-                    fechaCita = turnoViewModel.FechaCita,
+                    fechaCita = DateTime.Parse(turnoViewModel.FechaCita),
                     PrestadorMedico = _context.Medicos.FirstOrDefault(m => m.IdPrestador == turnoViewModel.IdPrestador),
                     Afiliado = _context.Afiliados.FirstOrDefault(a => a.IdAfiliado == turnoViewModel.IdAfiliado),
                     Especialidad = turnoViewModel.Especialidad

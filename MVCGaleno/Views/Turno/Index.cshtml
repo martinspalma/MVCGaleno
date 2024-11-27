@@ -21,7 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Afiliado.NombreCompleto)
             </th>
-            
+            <th>
+                @Html.DisplayNameFor(model => model.fechaCita)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +38,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Afiliado.NombreCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaCita)
                 </td>
                 
                 <td>

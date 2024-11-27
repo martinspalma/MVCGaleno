@@ -1,4 +1,4 @@
-﻿@model MVCGaleno.Models.PrestadorMedico
+﻿@model MVCGaleno.Models.PrestadorMedicoCreateViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -15,13 +15,28 @@
             <input type="hidden" asp-for="IdPrestador" />
             <div class="form-group">
                 <label asp-for="Especialidad" class="control-label"></label>
-                <select asp-for="Especialidad" class="form-control"></select>
+
+                <select asp-for="Especialidad" class="form-control" asp-items="Html.GetEnumSelectList<Especialidad>()">
+                    <option selected="selected" value=""> Please select</option>
+                </select>
+
                 <span asp-validation-for="Especialidad" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NombreCompleto" class="control-label"></label>
-                <input asp-for="NombreCompleto" class="form-control" />
-                <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+                <label class="control-label">NúmeroCompleto</label>
+                <div class="d-flex align-items-center">
+                    <div class="me-2">
+                        <label for="Nombre" class="form-label small"> Nombre </label>
+                        <input asp-for="Nombre" class="form-control" style="width: 100px;" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+
+                    <div>
+                        <label for="Apellido" class="form-label small">Apellido</label>
+                        <input asp-for="Apellido" class="form-control" style="width: 150px;" />
+                        <span asp-validation-for="Apellido" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="MatriculaProfesional" class="control-label"></label>
@@ -34,14 +49,54 @@
                 <span asp-validation-for="MailMedico" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TelefonoMedico" class="control-label"></label>
-                <input asp-for="TelefonoMedico" class="form-control" />
-                <span asp-validation-for="TelefonoMedico" class="text-danger"></span>
+                <label class="control-label">Número de Teléfono</label>
+                <div class="d-flex align-items-center">
+                    <div class="me-2">
+                        <label for="CodigoArea" class="form-label small">Código de Área</label>
+                        <input asp-for="CodigoArea" class="form-control" style="width: 100px;" placeholder="XXX" />
+                        <span asp-validation-for="CodigoArea" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label for="Caracteristica" class="form-label small">Caracteristica</label>
+                        <input asp-for="Caracteristica" class="form-control" style="width: 150px;" placeholder="XXXX" />
+                        <span asp-validation-for="Caracteristica" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label for="Numero" class="form-label small">Número</label>
+                        <input asp-for="Numero" class="form-control" style="width: 150px;" placeholder="XXXX" />
+                        <span asp-validation-for="Numero" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="DireccionMedico" class="control-label"></label>
-                <input asp-for="DireccionMedico" class="form-control" />
-                <span asp-validation-for="DireccionMedico" class="text-danger"></span>
+            <<div class="form-group">
+                <label class="control-label">DireccionMedico</label>
+                <div class="d-flex align-items-center">
+                    <div class="me-2">
+                        <label for="Calle" class="form-label small">Calle</label>
+                        <input asp-for="Calle" class="form-control" style="width: 100px;" />
+                        <span asp-validation-for="Calle" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label for="NumeroCalle" class="form-label small">NumeroCalle</label>
+                        <input asp-for="NumeroCalle" class="form-control" style="width: 150px;" />
+                        <span asp-validation-for="NumeroCalle" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label for="Piso" class="form-label small">Piso</label>
+                        <input asp-for="Piso" class="form-control" style="width: 150px;" />
+                        <span asp-validation-for="Piso" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label for="Depto" class="form-label small">Depto</label>
+                        <input asp-for="Depto" class="form-control" style="width: 150px;" />
+                        <span asp-validation-for="Depto" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label for="Localidad" class="form-label small">Localidad</label>
+                        <input asp-for="Localidad" class="form-control" style="width: 150px;" />
+                        <span asp-validation-for="Localidad" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

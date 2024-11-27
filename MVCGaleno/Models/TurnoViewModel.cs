@@ -12,6 +12,6 @@ namespace MVCGaleno.Models
         public int IdPrestador { get; set; }
         [Required]
         public Especialidad Especialidad { get; set; }
-        public DateTime FechaCita { get; set; }
+        public String FechaCita { get; set; }
     }
 }

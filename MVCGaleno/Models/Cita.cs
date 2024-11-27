@@ -9,7 +9,7 @@ namespace MVCGaleno.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdCita { get; set; }
 
-        [Display(Name = "Fecha cita")]
+        [DisplayFormat(DataFormatString = "Fecha {0:dd:MM:yy} Hora {0:HH:mm}")]
         public DateTime fechaCita { get; set; }
 
         public Boolean estaDisponible { get; set; }

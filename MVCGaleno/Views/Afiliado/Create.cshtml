@@ -1,4 +1,4 @@
-﻿@model MVCGaleno.Models.Afiliado
+﻿@model MVCGaleno.Models.CreateViewModel
 
 @{
     ViewData["Title"] = "Crear Afiliado";
@@ -20,9 +20,20 @@
 
                 <!-- Nombre Completo -->
                 <div class="form-group">
-                    <label asp-for="NombreCompleto" class="control-label font-weight-bold"></label>
-                    <input asp-for="NombreCompleto" class="form-control" placeholder="Ingrese el nombre completo" />
-                    <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+                    <label class="control-label">NombreCompleto</label>
+                    <div class="d-flex align-items-center">
+                        <div class="me-2">
+                            <label for="Nombre" class="form-label small"> Nombre </label>
+                            <input asp-for="Nombre" class="form-control" style="width: 100px;" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+
+                        <div>
+                            <label for="Apellido" class="form-label small">Apellido</label>
+                            <input asp-for="Apellido" class="form-control" style="width: 150px;" />
+                            <span asp-validation-for="Apellido" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- DNI -->
@@ -50,9 +61,24 @@
 
                 <!-- Teléfono -->
                 <div class="form-group">
-                    <label asp-for="telefono" class="control-label font-weight-bold"></label>
-                    <input asp-for="telefono" class="form-control" placeholder="Ingrese el número de teléfono" />
-                    <span asp-validation-for="telefono" class="text-danger"></span>
+                    <label class="control-label">Número de Teléfono</label>
+                    <div class="d-flex align-items-center">
+                        <div class="me-2">
+                            <label for="CodigoArea" class="form-label small">Código de Área</label>
+                            <input asp-for="CodigoArea" class="form-control" style="width: 100px;" placeholder="XXX" />
+                            <span asp-validation-for="CodigoArea" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <label for="Caracteristica" class="form-label small">Caracteristica</label>
+                            <input asp-for="Caracteristica" class="form-control" style="width: 150px;" placeholder="XXXX" />
+                            <span asp-validation-for="Caracteristica" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <label for="Numero" class="form-label small">Número</label>
+                            <input asp-for="Numero" class="form-control" style="width: 150px;" placeholder="XXXX" />
+                            <span asp-validation-for="Numero" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Botón de envío -->

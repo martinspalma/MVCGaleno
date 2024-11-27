@@ -49,52 +49,128 @@ namespace MVCGaleno.Controllers
             return View();
         }
 
-        // POST: PrestadorMedicoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdPrestador,Especialidad,NombreCompleto,MatriculaProfesional,MailMedico,TelefonoMedico,DireccionMedico")] PrestadorMedico prestadorMedico)
+        public async Task<IActionResult> Create(PrestadorMedicoCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(prestadorMedico);
+                var DireccionMedico = $"{model.Calle}: {model.NumeroCalle}, Piso {model.Piso}, Depto {model.Depto}, Loc: {model.Localidad}";
+                var NombreCompleto = $"Dr./Dra. {model.Nombre} {model.Apellido}";
+                var telefonoCompleto = $"({model.CodigoArea}) {model.Caracteristica} - {model.Numero}";
+                var prestadorMedico = new PrestadorMedico
+                {
+                    Especialidad= model.Especialidad,
+                    NombreCompleto = NombreCompleto,
+                    MatriculaProfesional = model.MatriculaProfesional,
+                    MailMedico = model.MailMedico,
+                    DireccionMedico = DireccionMedico,
+                    TelefonoMedico = telefonoCompleto // Guardamos el formato requerido
+                };
+
+                _context.Medicos.Add(prestadorMedico);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(prestadorMedico);
+
+            return View(model);
         }
 
+        // POST: PrestadorMedicoes/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /*COMENTADO ORIGINAL Y VAMO' A PEGAR EL DE CHATGPT
+          [HttpPost]
+         [ValidateAntiForgeryToken]
+         public async Task<IActionResult> Create([Bind("IdPrestador,Especialidad,NombreCompleto,MatriculaProfesional,MailMedico,TelefonoMedico,DireccionMedico")] PrestadorMedico prestadorMedico)
+         {
+             if (ModelState.IsValid)
+             {
+                 _context.Add(prestadorMedico);
+                 await _context.SaveChangesAsync();
+                 return RedirectToAction(nameof(Index));
+             }
+             return View(prestadorMedico);
+         }
+        ES HASTA ACA LA JODA
+        */
         // GET: PrestadorMedicoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
+         {
+             if (id == null)
+             {
+                 return NotFound();
+             }
             var prestadorMedico = await _context.Medicos.FindAsync(id);
-            if (prestadorMedico == null)
-            {
-                return NotFound();
-            }
-            return View(prestadorMedico);
-        }
+            char finNombre = ' ';
+            String finCalle = ": ";
+            String finNumeroCalle = ", Piso";
+            String finPiso = ", Depto";
+            String finDepto = ", Loc:";
+            int inicioNumeroCalle = prestadorMedico.DireccionMedico.IndexOf(finCalle,0);
+            int inicioPiso = prestadorMedico.DireccionMedico.IndexOf(finNumeroCalle, inicioNumeroCalle);
+            int inicioDpto = prestadorMedico.DireccionMedico.IndexOf(finPiso, inicioNumeroCalle);
+            int inicioLoc = prestadorMedico.DireccionMedico.IndexOf(finDepto, inicioNumeroCalle);
 
+
+            int posicionFinNombre = prestadorMedico.NombreCompleto.IndexOf(finNombre, 8);
+            int inicioApellido = ((prestadorMedico.NombreCompleto.Length) - posicionFinNombre) - 1;
+            int inicioLoca = inicioLoc + finDepto.Length;
+            var nuevo = new PrestadorMedicoCreateViewModel
+            
+            {
+
+                //= $"{model.Calle}: {model.NumeroCalle}, Piso {model.Piso}, Depto {model.Depto}, Loc: {model.Localidad}";
+                IdPrestador= prestadorMedico.IdPrestador,       
+                Especialidad = prestadorMedico.Especialidad,
+                CodigoArea= prestadorMedico.TelefonoMedico.Substring(1,3),
+                Caracteristica= prestadorMedico.TelefonoMedico.Substring(6, 4),
+                Numero= prestadorMedico.TelefonoMedico.Substring(13, 4),
+                
+                MailMedico=prestadorMedico.MailMedico,
+                Nombre=prestadorMedico.NombreCompleto.Substring(8, posicionFinNombre-1),
+                Apellido = prestadorMedico.NombreCompleto.Substring(inicioApellido),
+                MatriculaProfesional =prestadorMedico.MatriculaProfesional,
+                Calle = prestadorMedico.DireccionMedico.Substring(0, inicioNumeroCalle),
+                NumeroCalle = prestadorMedico.DireccionMedico.Substring((inicioNumeroCalle+ finCalle.Length), 4),
+                Piso = prestadorMedico.DireccionMedico.Substring(inicioPiso+ finNumeroCalle.Length, 2),
+                Depto = prestadorMedico.DireccionMedico.Substring(inicioDpto+ finPiso.Length, 2),
+                Localidad=prestadorMedico.DireccionMedico.Substring(inicioLoca),
+            }
+            ;
+             if (nuevo == null)
+             {
+                 return NotFound();
+             }
+             return View(nuevo); // aca tendria que enviar ViewModel
+         }
+        
         // POST: PrestadorMedicoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdPrestador,Especialidad,NombreCompleto,MatriculaProfesional,MailMedico,TelefonoMedico,DireccionMedico")] PrestadorMedico prestadorMedico)
+        public async Task<IActionResult> Edit(int id, PrestadorMedicoCreateViewModel model)
         {
-            if (id != prestadorMedico.IdPrestador)
+            var prestadorMedico = await _context.Medicos.FindAsync(id);
+            if (id != model.IdPrestador)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                var telefonoCompleto = $"({model.CodigoArea}) {model.Caracteristica} - {model.Numero}";
+                var NombreCompleto = $"Dr./Dra. {model.Nombre} {model.Apellido}";
+                var DireccionMedico = $"{model.Calle}: {model.NumeroCalle}, Piso {model.Piso}, Depto {model.Depto}, Loc: {model.Localidad}";
+
+                prestadorMedico.Especialidad = model.Especialidad;
+                    prestadorMedico.NombreCompleto = NombreCompleto;
+                    prestadorMedico.MatriculaProfesional = model.MatriculaProfesional;
+                    prestadorMedico.MailMedico = model.MailMedico;
+                    prestadorMedico.DireccionMedico = DireccionMedico;
+                    prestadorMedico.TelefonoMedico = telefonoCompleto; // Guardamos el formato requerido
+                
                 try
                 {
                     _context.Update(prestadorMedico);

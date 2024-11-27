@@ -12,11 +12,17 @@ namespace MVCGaleno.Models
         public int IdPrestador { get; set; }
         [EnumDataType(typeof(Especialidad))]
         public Especialidad Especialidad { get; set; }
+        
         public string NombreCompleto { get; set; }
+        
+        
         public string MatriculaProfesional { get; set; }
-        public string MailMedico { get; set; }
-        public int TelefonoMedico { get; set; }
+        
+        public string MailMedico { get; set; }            
+        
         public string DireccionMedico { get; set; }
+        
+        public string TelefonoMedico { get; set; }
     }
 }
 

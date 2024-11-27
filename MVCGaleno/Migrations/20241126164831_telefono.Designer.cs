@@ -4,6 +4,7 @@ using MVCGaleno.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCGaleno.Migrations
 {
     [DbContext(typeof(GalenoDatabaseContext))]
-    partial class GalenoDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20241126164831_telefono")]
+    partial class telefono
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,9 +45,8 @@ namespace MVCGaleno.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("telefono")
+                        .HasColumnType("int");
 
                     b.Property<int>("tipoPlan")
                         .HasColumnType("int");

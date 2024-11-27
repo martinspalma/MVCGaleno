@@ -55,15 +55,27 @@ namespace MVCGalenos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdAfiliado,NombreCompleto,Dni,tipoPlan,mail,telefono")] Afiliado afiliado)
+        public async Task<IActionResult> Create(CreateViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var telefonoCompleto = $"({model.CodigoArea}) {model.Caracteristica} - {model.Numero}";
+                var NombreCompleto = $"{model.Nombre} {model.Apellido}";
+                var afiliado = new Afiliado
+                {
+                    Dni = model.Dni,
+                    mail = model.mail,
+                    tipoPlan = model.tipoPlan,
+                    telefono = telefonoCompleto,
+                    NombreCompleto = NombreCompleto,
+
+                };
+
                 _context.Add(afiliado);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(afiliado);
+            return View(model);
         }
 
         // GET: Afiliado/Edit/5
@@ -73,13 +85,28 @@ namespace MVCGalenos.Controllers
             {
                 return NotFound();
             }
-
+            
+            char finNombre = ' ';
             var afiliado = await _context.Afiliados.FindAsync(id);
-            if (afiliado == null)
+            int posicionFinNombre = afiliado.NombreCompleto.IndexOf(finNombre, 1);
+            int inicioApellido = ((afiliado.NombreCompleto.Length) - posicionFinNombre)-3;
+            var nuevo = new CreateViewModel
+            {
+                Nombre = afiliado.NombreCompleto.Substring(0, posicionFinNombre),
+                Apellido = afiliado.NombreCompleto.Substring(inicioApellido),
+                Dni = afiliado.Dni,
+                tipoPlan = afiliado.tipoPlan,
+                mail = afiliado.mail,
+                CodigoArea = afiliado.telefono.Substring(1, 3),
+                Caracteristica = afiliado.telefono.Substring(6, 4),
+                Numero = afiliado.telefono.Substring(13, 4),
+            };
+
+            if (nuevo == null)
             {
                 return NotFound();
             }
-            return View(afiliado);
+            return View(nuevo);
         }
 
         // POST: Afiliado/Edit/5
@@ -87,15 +114,24 @@ namespace MVCGalenos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdAfiliado,NombreCompleto,Dni,tipoPlan,mail,telefono")] Afiliado afiliado)
+        public async Task<IActionResult> Edit(int id, CreateViewModel model )
         {
-            if (id != afiliado.IdAfiliado)
+            var afiliado= await _context.Afiliados.FindAsync(id);
+            if (id != model.IdAfiliado)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                var telefonoCompleto = $"({model.CodigoArea}) {model.Caracteristica} - {model.Numero}";
+                var NombreCompleto = $" {model.Nombre} {model.Apellido}";
+
+                    afiliado.tipoPlan = model.tipoPlan;
+                    afiliado.Dni = model.Dni;
+                    afiliado.mail = model.mail;
+                    afiliado.NombreCompleto = NombreCompleto;
+                    afiliado.telefono = telefonoCompleto;
                 try
                 {
                     _context.Update(afiliado);
