@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCGaleno.Migrations
 {
     [DbContext(typeof(GalenoDatabaseContext))]
-    [Migration("20241119040146_inicial")]
+    [Migration("20241127210615_inicial")]
     partial class inicial
     {
         /// <inheritdoc />
@@ -45,8 +45,9 @@ namespace MVCGaleno.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("telefono")
-                        .HasColumnType("int");
+                    b.Property<string>("telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("tipoPlan")
                         .HasColumnType("int");
@@ -107,8 +108,9 @@ namespace MVCGaleno.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TelefonoMedico")
-                        .HasColumnType("int");
+                    b.Property<string>("TelefonoMedico")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdPrestador");
 

@@ -17,11 +17,11 @@ namespace MVCGaleno.Migrations
                 {
                     IdAfiliado = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreCompleto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Dni = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     tipoPlan = table.Column<int>(type: "int", nullable: false),
                     mail = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    telefono = table.Column<int>(type: "int", nullable: false)
+                    NombreCompleto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    telefono = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,8 +38,8 @@ namespace MVCGaleno.Migrations
                     NombreCompleto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MatriculaProfesional = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MailMedico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TelefonoMedico = table.Column<int>(type: "int", nullable: false),
-                    DireccionMedico = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    DireccionMedico = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TelefonoMedico = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
