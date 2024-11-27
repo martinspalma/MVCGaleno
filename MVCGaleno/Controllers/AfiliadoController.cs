@@ -71,7 +71,7 @@ namespace MVCGalenos.Controllers
 
                 };
 
-                _context.Add(afiliado);
+                _context.Afiliados.Add(afiliado);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -85,13 +85,14 @@ namespace MVCGalenos.Controllers
             {
                 return NotFound();
             }
-            
-            char finNombre = ' ';
             var afiliado = await _context.Afiliados.FindAsync(id);
-            int posicionFinNombre = afiliado.NombreCompleto.IndexOf(finNombre, 1);
-            int inicioApellido = ((afiliado.NombreCompleto.Length) - posicionFinNombre)-3;
+
+            char finNombre = ' ';
+            int posicionFinNombre = afiliado.NombreCompleto.IndexOf(finNombre, 2);
+            int inicioApellido = ((afiliado.NombreCompleto.Length) - posicionFinNombre);
             var nuevo = new CreateViewModel
             {
+                IdAfiliado=afiliado.IdAfiliado,
                 Nombre = afiliado.NombreCompleto.Substring(0, posicionFinNombre),
                 Apellido = afiliado.NombreCompleto.Substring(inicioApellido),
                 Dni = afiliado.Dni,
@@ -161,8 +162,7 @@ namespace MVCGalenos.Controllers
                 return NotFound();
             }
 
-            var afiliado = await _context.Afiliados
-                .FirstOrDefaultAsync(m => m.IdAfiliado == id);
+            var afiliado = await _context.Afiliados.FirstOrDefaultAsync(m => m.IdAfiliado == id);
             if (afiliado == null)
             {
                 return NotFound();

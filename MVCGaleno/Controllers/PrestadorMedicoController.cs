@@ -65,7 +65,7 @@ namespace MVCGaleno.Controllers
                     MatriculaProfesional = model.MatriculaProfesional,
                     MailMedico = model.MailMedico,
                     DireccionMedico = DireccionMedico,
-                    TelefonoMedico = telefonoCompleto // Guardamos el formato requerido
+                    TelefonoMedico = telefonoCompleto 
                 };
 
                 _context.Medicos.Add(prestadorMedico);
@@ -79,7 +79,7 @@ namespace MVCGaleno.Controllers
         // POST: PrestadorMedicoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        /*COMENTADO ORIGINAL Y VAMO' A PEGAR EL DE CHATGPT
+        /*COMENTADO ORIGINAL
           [HttpPost]
          [ValidateAntiForgeryToken]
          public async Task<IActionResult> Create([Bind("IdPrestador,Especialidad,NombreCompleto,MatriculaProfesional,MailMedico,TelefonoMedico,DireccionMedico")] PrestadorMedico prestadorMedico)
@@ -102,7 +102,7 @@ namespace MVCGaleno.Controllers
                  return NotFound();
              }
             var prestadorMedico = await _context.Medicos.FindAsync(id);
-            char finNombre = ' ';
+            
             String finCalle = ": ";
             String finNumeroCalle = ", Piso";
             String finPiso = ", Depto";
@@ -111,11 +111,12 @@ namespace MVCGaleno.Controllers
             int inicioPiso = prestadorMedico.DireccionMedico.IndexOf(finNumeroCalle, inicioNumeroCalle);
             int inicioDpto = prestadorMedico.DireccionMedico.IndexOf(finPiso, inicioNumeroCalle);
             int inicioLoc = prestadorMedico.DireccionMedico.IndexOf(finDepto, inicioNumeroCalle);
+            int inicioLoca = inicioLoc + finDepto.Length;
 
-
+            char finNombre = ' ';
             int posicionFinNombre = prestadorMedico.NombreCompleto.IndexOf(finNombre, 8);
             int inicioApellido = ((prestadorMedico.NombreCompleto.Length) - posicionFinNombre) - 1;
-            int inicioLoca = inicioLoc + finDepto.Length;
+            
             var nuevo = new PrestadorMedicoCreateViewModel
             
             {
