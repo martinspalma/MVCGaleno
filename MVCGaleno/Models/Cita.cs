@@ -10,6 +10,7 @@ namespace MVCGaleno.Models
         public int IdCita { get; set; }
 
         [DisplayFormat(DataFormatString = "Fecha {0:dd/MM/yy} Hora {0:HH:mm}")]
+        [FechaMayorIgualHoy]
         public DateTime fechaCita { get; set; }
 
         public Boolean estaDisponible { get; set; }
