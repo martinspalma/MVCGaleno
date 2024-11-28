@@ -60,7 +60,7 @@ namespace MVCGalenos.Controllers
             if (ModelState.IsValid)
             {
                 var telefonoCompleto = $"({model.CodigoArea}) {model.Caracteristica} - {model.Numero}";
-                var NombreCompleto = $"{model.Nombre} {model.Apellido}";
+                var NombreCompleto = $"{model.Apellido}, {model.Nombre}";
                 var afiliado = new Afiliado
                 {
                     Dni = model.Dni,
@@ -87,14 +87,14 @@ namespace MVCGalenos.Controllers
             }
             var afiliado = await _context.Afiliados.FindAsync(id);
 
-            char finNombre = ' ';
-            int posicionFinNombre = afiliado.NombreCompleto.IndexOf(finNombre, 2);
-            int inicioApellido = ((afiliado.NombreCompleto.Length) - posicionFinNombre)-1;
+            char finApellido = ',';
+            int posicionFinApellido = afiliado.NombreCompleto.IndexOf(finApellido, 0);
+            int inicioNombre = (1 + posicionFinApellido);
             var nuevo = new CreateViewModel
             {
                 IdAfiliado=afiliado.IdAfiliado,
-                Nombre = afiliado.NombreCompleto.Substring(0, posicionFinNombre),
-                Apellido = afiliado.NombreCompleto.Substring(inicioApellido),
+                Apellido = afiliado.NombreCompleto.Substring(0, posicionFinApellido),
+                Nombre = afiliado.NombreCompleto.Substring(inicioNombre),
                 Dni = afiliado.Dni,
                 tipoPlan = afiliado.tipoPlan,
                 mail = afiliado.mail,
@@ -126,7 +126,7 @@ namespace MVCGalenos.Controllers
             if (ModelState.IsValid)
             {
                 var telefonoCompleto = $"({model.CodigoArea}) {model.Caracteristica} - {model.Numero}";
-                var NombreCompleto = $" {model.Nombre} {model.Apellido}";
+                var NombreCompleto = $" {model.Apellido}, {model.Nombre}";
 
                     afiliado.tipoPlan = model.tipoPlan;
                     afiliado.Dni = model.Dni;

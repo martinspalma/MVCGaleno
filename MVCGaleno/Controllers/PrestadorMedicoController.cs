@@ -56,7 +56,7 @@ namespace MVCGaleno.Controllers
             if (ModelState.IsValid)
             {
                 var DireccionMedico = $"{model.Calle}: {model.NumeroCalle}, Piso {model.Piso}, Depto {model.Depto}, Loc: {model.Localidad}";
-                var NombreCompleto = $"Dr./Dra. {model.Nombre} {model.Apellido}";
+                var NombreCompleto = $"Dr./Dra. {model.Apellido}, {model.Nombre}";
                 var telefonoCompleto = $"({model.CodigoArea}) {model.Caracteristica} - {model.Numero}";
                 var prestadorMedico = new PrestadorMedico
                 {
@@ -112,11 +112,14 @@ namespace MVCGaleno.Controllers
             int inicioDpto = prestadorMedico.DireccionMedico.IndexOf(finPiso, inicioNumeroCalle);
             int inicioLoc = prestadorMedico.DireccionMedico.IndexOf(finDepto, inicioNumeroCalle);
             int inicioLoca = inicioLoc + finDepto.Length;
-
-            char finNombre = ' ';
-            int posicionFinNombre = prestadorMedico.NombreCompleto.IndexOf(finNombre, 8);
-            int inicioApellido = ((prestadorMedico.NombreCompleto.Length) - posicionFinNombre) - 1;
             
+            char inicioApellido = ' ';
+            char finApellido = ',';
+            int posicionInicioApellido = prestadorMedico.NombreCompleto.IndexOf(inicioApellido, 0);
+            int posicionFinApellido = prestadorMedico.NombreCompleto.IndexOf(finApellido, 0);
+            int tamanioApellido = posicionFinApellido - posicionInicioApellido;
+            int inicioNombre = (1 + posicionFinApellido);
+
             var nuevo = new PrestadorMedicoCreateViewModel
             
             {
@@ -129,8 +132,9 @@ namespace MVCGaleno.Controllers
                 Numero= prestadorMedico.TelefonoMedico.Substring(13, 4),
                 
                 MailMedico=prestadorMedico.MailMedico,
-                Nombre=prestadorMedico.NombreCompleto.Substring(8, posicionFinNombre-1),
-                Apellido = prestadorMedico.NombreCompleto.Substring(inicioApellido),
+                Apellido = prestadorMedico.NombreCompleto.Substring(posicionInicioApellido, tamanioApellido),
+                Nombre =prestadorMedico.NombreCompleto.Substring(inicioNombre),
+
                 MatriculaProfesional =prestadorMedico.MatriculaProfesional,
                 Calle = prestadorMedico.DireccionMedico.Substring(0, inicioNumeroCalle),
                 NumeroCalle = prestadorMedico.DireccionMedico.Substring((inicioNumeroCalle+ finCalle.Length), 4),
@@ -162,7 +166,7 @@ namespace MVCGaleno.Controllers
             if (ModelState.IsValid)
             {
                 var telefonoCompleto = $"({model.CodigoArea}) {model.Caracteristica} - {model.Numero}";
-                var NombreCompleto = $"Dr./Dra. {model.Nombre} {model.Apellido}";
+                var NombreCompleto = $"Dr./Dra. {model.Apellido}, {model.Nombre}";
                 var DireccionMedico = $"{model.Calle}: {model.NumeroCalle}, Piso {model.Piso}, Depto {model.Depto}, Loc: {model.Localidad}";
 
                 prestadorMedico.Especialidad = model.Especialidad;
