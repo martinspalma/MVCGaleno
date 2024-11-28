@@ -107,7 +107,7 @@ namespace MVCGaleno.Controllers
                 IdAfiliado = afiliado.IdAfiliado,
                 IdPrestador = prestadorMedico.IdPrestador,
                 Especialidad = prestadorMedico.Especialidad,
-                FechaCita = cita.fechaCita.ToString("dd-MM-yy HH:mm")
+                FechaCita = cita.fechaCita.ToString("dd/MM/yy HH:mm")
                 
 
             };

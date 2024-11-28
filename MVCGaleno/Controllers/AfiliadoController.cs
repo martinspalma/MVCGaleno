@@ -89,7 +89,7 @@ namespace MVCGalenos.Controllers
 
             char finNombre = ' ';
             int posicionFinNombre = afiliado.NombreCompleto.IndexOf(finNombre, 2);
-            int inicioApellido = ((afiliado.NombreCompleto.Length) - posicionFinNombre);
+            int inicioApellido = ((afiliado.NombreCompleto.Length) - posicionFinNombre)-1;
             var nuevo = new CreateViewModel
             {
                 IdAfiliado=afiliado.IdAfiliado,

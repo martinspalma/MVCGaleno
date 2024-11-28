@@ -19,7 +19,7 @@ namespace MVCGaleno.Models
 
         [Required]
         public Afiliado Afiliado { get; set; }
-        [DisplayFormat(DataFormatString = "Fecha {0:dd:MM:yy} Hora {0:HH:mm}")]
+        [DisplayFormat(DataFormatString = "Fecha {0:dd/MM/yy} Hora {0:HH:mm}")]
         public DateTime? fechaCita { get; set; }
     }
 }
