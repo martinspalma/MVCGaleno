@@ -1,16 +1,40 @@
 ﻿@model MVCGaleno.Models.ConfirmTurnoViewModel
 
 @{
-    ViewData["Title"] = "Confirm Turno";
+    ViewData["Title"] = "Confirmar Turno";
 }
 
-<h2>Confirm Turno</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-primary text-white">
+                    <h4>@ViewData["Title"]</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="ConfirmTurno" method="post">
+                        <!-- Campo oculto -->
+                        <input type="hidden" asp-for="IdCita" />
 
-<form asp-action="ConfirmTurno" method="post">
-    <input type="hidden" asp-for="IdCita" />
-    <div class="form-group">
-        <label asp-for="Dni"></label>
-        <input asp-for="Dni" class="form-control" />
+                        <!-- Campo DNI -->
+                        <div class="mb-3">
+                            <label asp-for="Dni" class="form-label">DNI</label>
+                            <input asp-for="Dni" class="form-control" />
+                            <span asp-validation-for="Dni" class="text-danger"></span>
+                        </div>
+
+                        <!-- Botón Confirmar -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Confirmar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Confirm</button>
-</form>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@4.0.0/dist/jquery.validate.unobtrusive.min.js"></script>
+}

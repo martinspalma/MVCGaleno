@@ -1,30 +1,37 @@
 ﻿@model MVCGaleno.Models.Turno
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles del Turno";
 }
 
-<h1>Details</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Card de detalles -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>@ViewData["Title"]</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="text-center">Detalles del Turno</h5>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-4">Especialidad</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Especialidad)</dd>
 
-<div>
-    <h4>Turno</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Especialidad)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Especialidad)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.fechaCita)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.fechaCita)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdTurno">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                        <dt class="col-sm-4">Fecha de la Cita</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.fechaCita)</dd>
+                    </dl>
+
+                    <div class="d-flex justify-content-between">
+                        <!-- Botón de Editar -->
+                        <a asp-action="Edit" asp-route-id="@Model?.IdTurno" class="btn btn-warning">Editar</a>
+
+                        <!-- Botón de Volver -->
+                        <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
