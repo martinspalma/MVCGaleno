@@ -6,9 +6,7 @@
 
 <div class="container mt-5">
     <!-- Título principal -->
-    <h1 class="text-center text-primary mb-4">
-        <i class="fas fa-user-plus me-2"></i>Registrar Nuevo Afiliado
-    </h1>
+    <h1 class="text-center text-primary mb-4">Registrar Nuevo Afiliado</h1>
 
     <!-- Breve descripción -->
     <p class="text-center text-muted">Complete los campos a continuación para agregar un nuevo afiliado al sistema.</p>
@@ -16,77 +14,76 @@
 
     <!-- Formulario -->
     <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10">
+        <div class="col-md-6">
             <form asp-action="Create" class="card shadow p-4">
-                <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3" role="alert"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
                 <!-- Nombre Completo -->
-                <div class="form-group mb-3">
-                    <label class="fw-bold">Nombre Completo</label>
-                    <div class="row">
-                        <div class="col-md-6 mb-2">
-                            <label for="Nombre" class="form-label small">Nombre</label>
-                            <input asp-for="Nombre" class="form-control" placeholder="Ingrese el nombre" />
+                <div class="form-group">
+                    <label class="control-label">NombreCompleto</label>
+                    <div class="d-flex align-items-center">
+                        <div class="me-2">
+                            <label for="Nombre" class="form-label small"> Nombre </label>
+                            <input asp-for="Nombre" class="form-control" style="width: 100px;" />
                             <span asp-validation-for="Nombre" class="text-danger"></span>
                         </div>
-                        <div class="col-md-6">
+
+                        <div>
                             <label for="Apellido" class="form-label small">Apellido</label>
-                            <input asp-for="Apellido" class="form-control" placeholder="Ingrese el apellido" />
+                            <input asp-for="Apellido" class="form-control" style="width: 150px;" />
                             <span asp-validation-for="Apellido" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
 
                 <!-- DNI -->
-                <div class="form-group mb-3">
-                    <label asp-for="Dni" class="fw-bold">DNI</label>
+                <div class="form-group">
+                    <label asp-for="Dni" class="control-label font-weight-bold"></label>
                     <input asp-for="Dni" class="form-control" placeholder="Ingrese el DNI" />
                     <span asp-validation-for="Dni" class="text-danger"></span>
                 </div>
 
                 <!-- Tipo de Plan -->
-                <div class="form-group mb-3">
-                    <label asp-for="tipoPlan" class="fw-bold">Tipo de Plan</label>
+                <div class="form-group">
+                    <label asp-for="tipoPlan" class="control-label font-weight-bold"></label>
                     <select asp-for="tipoPlan" class="form-control" asp-items="Html.GetEnumSelectList<TipoPlan>()">
-                        <option selected value="">Seleccione un tipo de plan</option>
+                        <option selected="selected" value="">Seleccione un tipo de plan</option>
                     </select>
                     <span asp-validation-for="tipoPlan" class="text-danger"></span>
                 </div>
 
                 <!-- Email -->
-                <div class="form-group mb-3">
-                    <label asp-for="mail" class="fw-bold">Correo Electrónico</label>
+                <div class="form-group">
+                    <label asp-for="mail" class="control-label font-weight-bold"></label>
                     <input asp-for="mail" class="form-control" placeholder="Ingrese el correo electrónico" />
                     <span asp-validation-for="mail" class="text-danger"></span>
                 </div>
 
                 <!-- Teléfono -->
-                <div class="form-group mb-3">
-                    <label class="fw-bold">Número de Teléfono</label>
-                    <div class="row">
-                        <div class="col-md-4 mb-2">
+                <div class="form-group">
+                    <label class="control-label">Número de Teléfono</label>
+                    <div class="d-flex align-items-center">
+                        <div class="me-2">
                             <label for="CodigoArea" class="form-label small">Código de Área</label>
-                            <input asp-for="CodigoArea" class="form-control" placeholder="XXX" />
+                            <input asp-for="CodigoArea" class="form-control" style="width: 100px;" placeholder="XXX" />
                             <span asp-validation-for="CodigoArea" class="text-danger"></span>
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <label for="Caracteristica" class="form-label small">Características</label>
-                            <input asp-for="Caracteristica" class="form-control" placeholder="XXXX" />
+                        <div>
+                            <label for="Caracteristica" class="form-label small">Caracteristica</label>
+                            <input asp-for="Caracteristica" class="form-control" style="width: 150px;" placeholder="XXXX" />
                             <span asp-validation-for="Caracteristica" class="text-danger"></span>
                         </div>
-                        <div class="col-md-4">
+                        <div>
                             <label for="Numero" class="form-label small">Número</label>
-                            <input asp-for="Numero" class="form-control" placeholder="XXXX" />
+                            <input asp-for="Numero" class="form-control" style="width: 150px;" placeholder="XXXX" />
                             <span asp-validation-for="Numero" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Botón de envío -->
-                <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        <i class="fas fa-save me-2"></i>Registrar Afiliado
-                    </button>
+                <div class="form-group text-center mt-4">
+                    <input type="submit" value="Registrar Afiliado" class="btn btn-primary btn-lg" />
                 </div>
             </form>
         </div>
@@ -94,8 +91,6 @@
 
     <!-- Enlace para volver -->
     <div class="text-center mt-4">
-        <a asp-action="Index" class="btn btn-outline-secondary">
-            <i class="fas fa-arrow-left me-2"></i>Volver a la lista
-        </a>
+        <a asp-action="Index" class="btn btn-link">← Volver a la lista</a>
     </div>
 </div>
