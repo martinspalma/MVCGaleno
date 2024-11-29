@@ -157,8 +157,9 @@ namespace MVCGaleno.Controllers
             {
                 return NotFound();
             }
-
+            // .Include(t => t.PrestadorMedico) ESTA INSTRUCCION INCLUYE LOS ATRIBUTOS DE LA CLASE
             var turno = await _context.Turnos
+                .Include(t => t.PrestadorMedico)
                 .FirstOrDefaultAsync(m => m.IdTurno == id);
             if (turno == null)
             {
