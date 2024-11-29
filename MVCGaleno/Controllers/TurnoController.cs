@@ -76,7 +76,7 @@ namespace MVCGaleno.Controllers
             var afiliado = _context.Afiliados.FirstOrDefault(a => a.Dni.Trim() == model.Dni.Trim());
             if (afiliado == null)
             {
-                ModelState.AddModelError("", "Afiliado no encontrado.");
+                ModelState.AddModelError("", "Afiliado no encontrado: ingrese correctamente el DNI.");
                 return View(model);
             }
 

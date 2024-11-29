@@ -72,7 +72,7 @@ namespace MVCGalenos.Controllers
                 };
 
                 _context.Afiliados.Add(afiliado);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();               
                 return RedirectToAction(nameof(Index));
             }
             return View(model);

@@ -6,11 +6,22 @@
 
 <h2>Confirm Turno</h2>
 
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
 <form asp-action="ConfirmTurno" method="post">
     <input type="hidden" asp-for="IdCita" />
     <div class="form-group">
         <label asp-for="Dni"></label>
         <input asp-for="Dni" class="form-control" />
-    </div>
+        <span asp-validation-for="Dni" class="text-danger"></span>
+        </div>
     <button type="submit" class="btn btn-primary">Confirm</button>
 </form>

@@ -11,6 +11,12 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PrestadorMedico)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PrestadorMedico)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Especialidad)
         </dt>
         <dd class="col-sm-10">
@@ -21,6 +27,25 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.fechaCita)
+        </dd>
+        <h5>Datos de contacto</h5>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PrestadorMedico.MailMedico)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PrestadorMedico.MailMedico)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PrestadorMedico.TelefonoMedico)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PrestadorMedico.TelefonoMedico)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PrestadorMedico.DireccionMedico)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PrestadorMedico.DireccionMedico)
         </dd>
     </dl>
 </div>
