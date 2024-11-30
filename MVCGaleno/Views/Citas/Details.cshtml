@@ -1,36 +1,34 @@
 ﻿@model MVCGaleno.Models.Cita
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles de la Cita";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Cita</h4>
+<div class="container mt-5">
+    <!-- Título principal -->
+    <h1 class="text-center text-primary mb-4">Detalles de la Cita</h1>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.fechaCita)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.fechaCita)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.estaDisponible)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.estaDisponible)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PrestadorMedico)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PrestadorMedico.IdPrestador)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdCita">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+    <!-- Información de la Cita -->
+    <div class="card shadow p-4">
+        <h4 class="text-secondary mb-4">Información</h4>
+        <dl class="row">
+            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.fechaCita)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.fechaCita)</dd>
+
+            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.estaDisponible)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.estaDisponible)</dd>
+
+            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.PrestadorMedico)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.PrestadorMedico.IdPrestador)</dd>
+    </div>
+    <!-- Botones de acción -->
+    <div class="text-center mt-4">
+        <a asp-action="Edit" asp-route-id="@Model?.IdCita" class="btn btn-warning btn-lg me-3">
+            <i class="bi bi-pencil"></i> Editar
+        </a>
+        <a asp-action="Index" class="btn btn-secondary btn-lg">
+            <i class="bi bi-arrow-left-circle"></i> Volver a la lista
+        </a>
+    </div>
 </div>

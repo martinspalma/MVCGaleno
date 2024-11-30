@@ -1,47 +1,66 @@
 ﻿@model MVCGaleno.Models.Cita
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Cita";
 }
 
-<h1>Create</h1>
+<div class="container mt-5">
+    <!-- Título principal -->
+    <h1 class="text-center text-primary mb-4">Registrar Nueva Cita</h1>
 
-<h4>Cita</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="fechaCita" class="control-label"></label>
-                <input asp-for="fechaCita" class="form-control" />
-                <span asp-validation-for="fechaCita" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="estaDisponible" /> @Html.DisplayNameFor(model => model.estaDisponible)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdPrestador" class="control-label"></label>
-                <select asp-for="IdPrestador" class="form-control" asp-items="ViewBag.IdPrestador"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <p class="text-center text-muted mb-5">Complete los campos a continuación para registrar una nueva cita.</p>
+
+    <!-- Formulario dentro de un contenedor con sombras y bordes redondeados -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form asp-action="Create" class="card shadow-sm p-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <!-- Fecha de Cita -->
+                <div class="form-group mb-4">
+                    <label asp-for="fechaCita" class="form-label">Fecha y Hora de Cita</label>
+                    <input asp-for="fechaCita" class="form-control" type="datetime-local" />
+                    <span asp-validation-for="fechaCita" class="text-danger"></span>
+                </div>
+
+
+                <!-- Disponibilidad -->
+                <div class="form-group form-check mb-4">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="estaDisponible" />
+                        @Html.DisplayNameFor(model => model.estaDisponible)
+                    </label>
+                </div>
+
+                <!-- Prestador -->
+                <div class="form-group mb-4">
+                    <label asp-for="IdPrestador" class="form-label">Seleccionar Prestador</label>
+                    <select asp-for="IdPrestador" class="form-control" asp-items="ViewBag.IdPrestador">
+                        <option value="">Seleccione un Prestador</option>
+                    </select>
+                    <span asp-validation-for="IdPrestador" class="text-danger"></span>
+                </div>
+
+                <!-- Botón de envío -->
+                <div class="form-group text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                        <i class="bi bi-calendar-plus"></i> Registrar Cita
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    <!-- Enlace para volver -->
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-outline-secondary btn-lg px-4">
+            <i class="bi bi-arrow-left-circle"></i> Volver a la lista
+        </a>
+    </div>
 </div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    
-   
-}
 }
