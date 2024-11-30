@@ -135,7 +135,7 @@ namespace MVCGaleno.Controllers
                 Calle = prestadorMedico.DireccionMedico.Substring(0, inicioNumeroCalle),
                 NumeroCalle = prestadorMedico.DireccionMedico.Substring((inicioNumeroCalle+ finCalle.Length), 4),
                 Piso = prestadorMedico.DireccionMedico.Substring(inicioPiso+ finNumeroCalle.Length, 2),
-                Depto = prestadorMedico.DireccionMedico.Substring(inicioDpto+ finPiso.Length, 2),
+                Depto = prestadorMedico.DireccionMedico.Substring(inicioDpto + finPiso.Length, 2),
                 Localidad=prestadorMedico.DireccionMedico.Substring(inicioLoca),
             }
             ;

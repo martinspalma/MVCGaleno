@@ -78,27 +78,41 @@
                 <div class="d-flex align-items-center">
                     <div class="me-2">
                         <label for="Calle" class="form-label small">Calle</label>
-                        <input asp-for="Calle" class="form-control" style="width: 100px;"  />
+                        <input asp-for="Calle" class="form-control" style="width: 150px;" placeholder="Solo letras" onkeypress="return /^[a-zA-Z\s]*$/.test(event.key)" />
                         <span asp-validation-for="Calle" class="text-danger"></span>
                     </div>
                     <div>
                         <label for="NumeroCalle" class="form-label small">NumeroCalle</label>
-                        <input asp-for="NumeroCalle" class="form-control" style="width: 150px;"  />
+                        <input asp-for="NumeroCalle" class="form-control" style="width: 100px;" placeholder="XXXX" maxlength="4" onkeypress="return /^\d*$/.test(event.key)" />
                         <span asp-validation-for="NumeroCalle" class="text-danger"></span>
                     </div>
                     <div>
                         <label for="Piso" class="form-label small">Piso</label>
-                        <input asp-for="Piso" class="form-control" style="width: 150px;" />
+                        <select asp-for="Piso" class="form-control" style="width: 100px;">
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
                         <span asp-validation-for="Piso" class="text-danger"></span>
                     </div>
                     <div>
                         <label for="Depto" class="form-label small">Depto</label>
-                        <input asp-for="Depto" class="form-control" style="width: 150px;" />
+                        <select asp-for="Depto" class="form-control" style="width: 100px;">
+                            @foreach (char letter in "ABCDEFGH")
+                            {
+                                <option value="@letter">@letter</option>
+                            }
+                        </select>
                         <span asp-validation-for="Depto" class="text-danger"></span>
                     </div>
                     <div>
                         <label for="Localidad" class="form-label small">Localidad</label>
-                        <input asp-for="Localidad" class="form-control" style="width: 150px;" />
+                        <select asp-for="Localidad" class="form-control" style="width: 200px;">
+                            <option value="CABA">CABA</option>
+                            <option value="Pcia Buenos Aires">Pcia Buenos Aires</option>
+                            <option value="Otra">Otra</option>
+                        </select>
                         <span asp-validation-for="Localidad" class="text-danger"></span>
                     </div>
                 </div>
