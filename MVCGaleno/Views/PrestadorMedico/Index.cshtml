@@ -4,62 +4,55 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="container mt-5">
+    <!-- Título -->
+    <h1 class="text-center text-primary mb-4">Listado de Prestadores Médicos</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Especialidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreCompleto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MatriculaProfesional)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MailMedico)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TelefonoMedico)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DireccionMedico)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Especialidad)
-            </td>
-            <td>
-               Dr/a. @Html.DisplayFor(modelItem => item.NombreCompleto)
-            </td>
-            <td>
-               M.@Html.DisplayFor(modelItem => item.MatriculaProfesional)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MailMedico)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TelefonoMedico)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DireccionMedico)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdPrestador">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdPrestador">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdPrestador">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="mb-3 text-end">
+        <a asp-action="Create" class="btn btn-outline-primary btn-sm">
+            <i class="bi bi-plus-circle"></i> Crear Nuevo Prestador Médico
+        </a>
+    </div>
+
+    <!-- Tabla -->
+    <table class="table table-striped table-bordered table-hover shadow-sm rounded">
+        <thead class="table-dark">
+            <tr>
+                <th>Especialidad</th>
+                <th>Nombre</th>
+                <th>Matricula</th>
+                <th>Mail</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Especialidad)</td>
+                    <td>Sr/a. @Html.DisplayFor(modelItem => item.NombreCompleto)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MatriculaProfesional)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MailMedico)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TelefonoMedico)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DireccionMedico)</td>
+                    <td class="text-center">
+                        <!-- Botones de acción alineados -->
+                        <div class="d-flex justify-content-center gap-2" style="white-space: nowrap;">
+                            <a asp-action="Edit" asp-route-id="@item.IdPrestador" class="btn btn-primary btn-sm">
+                                <i class="bi bi-pencil-square"></i> Editar
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.IdPrestador" class="btn btn-primary btn-sm">
+                                <i class="bi bi-eye"></i> Detalles
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.IdPrestador" class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

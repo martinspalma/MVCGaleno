@@ -1,132 +1,145 @@
 ﻿@model MVCGaleno.Models.PrestadorMedicoCreateViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Prestador Medico";
 }
 
-<h1>Create</h1>
+<div class="container mt-5">
+    <!-- Título principal -->
+    <h1 class="text-center text-primary mb-4">Registrar Nuevo Prestador Medico</h1>
 
-<h4>PrestadorMedico</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <p class="text-center text-muted">Complete los campos a continuación para agregar un nuevo prestador medico al sistema.</p>
+    <hr class="mb-5" />
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Create" class="card shadow p-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
             
-                <div class="form-group">
-                    <label asp-for="Especialidad" class="control-label"></label>
 
+                <!-- Tipo de Especialidad -->
+                <div class="form-group mt-3">
+                    <label asp-for="Especialidad" class="control-label">Tipo de Especialidad</label>
                     <select asp-for="Especialidad" class="form-control" asp-items="Html.GetEnumSelectList<Especialidad>()">
-                        <option selected="selected" value=""> Please select</option>
+                        <option value="" disabled selected>Seleccione un tipo de especialidad</option>
                     </select>
-
                     <span asp-validation-for="Especialidad" class="text-danger"></span>
                 </div>
                
-            <div class="form-group">
-                <label class="control-label">Número de Teléfono</label>
-                <div class="d-flex align-items-center">
-                    <div class="me-2">
-                        <label for="CodigoArea" class="form-label small">Código de Área</label>
-                        <input asp-for="CodigoArea" class="form-control" style="width: 100px;" placeholder="XXX" />
-                        <span asp-validation-for="CodigoArea" class="text-danger"></span>
-                    </div>
-                    <div>
-                        <label for="Caracteristica" class="form-label small">Caracteristica</label>
-                        <input asp-for="Caracteristica" class="form-control" style="width: 150px;" placeholder="XXXX" />
-                        <span asp-validation-for="Caracteristica" class="text-danger"></span>
-                    </div>
-                    <div>
-                        <label for="Numero" class="form-label small">Número</label>
-                        <input asp-for="Numero" class="form-control" style="width: 150px;" placeholder="XXXX" />
-                        <span asp-validation-for="Numero" class="text-danger"></span>
+
+
+                <!-- Teléfono -->
+                <div class="form-group mt-3">
+                    <label class="control-label">Teléfono</label>
+                    <div class="row g-2">
+                        <div class="col-md-3">
+                            <input asp-for="CodigoArea" class="form-control" placeholder="Área (Ej: 11)" />
+                            <span asp-validation-for="CodigoArea" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <input asp-for="Caracteristica" class="form-control" placeholder="Característica" />
+                            <span asp-validation-for="Caracteristica" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-5">
+                            <input asp-for="Numero" class="form-control" placeholder="Número" />
+                            <span asp-validation-for="Numero" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label">NombreCompleto</label>
-                <div class="d-flex align-items-center">
-                    <div class="me-2">
-                        <label for="Nombre" class="form-label small"> Nombre </label>
-                        <input asp-for="Nombre" class="form-control" style="width: 150px;"  />
-                        <span asp-validation-for="Nombre" class="text-danger"></span>
-                    </div>
-                    
-                    <div>
-                        <label for="Apellido" class="form-label small">Apellido</label>
-                        <input asp-for="Apellido" class="form-control" style="width: 150px;" />
-                        <span asp-validation-for="Apellido" class="text-danger"></span>
+
+                <!-- Nombre Completo -->
+                <div class="form-group">
+                    <label class="control-label">Nombre Completo</label>
+                    <div class="row g-2">
+                        <div class="col">
+                            <input asp-for="Nombre" class="form-control" placeholder="Nombre" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <input asp-for="Apellido" class="form-control" placeholder="Apellido" />
+                            <span asp-validation-for="Apellido" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label asp-for="MatriculaProfesional" class="control-label"></label>
-                <input asp-for="MatriculaProfesional" class="form-control" style="width: 100px;" placeholder="XXXX" maxlength="4" onkeypress="return /^\d*$/.test(event.key)" />
-                <span asp-validation-for="MatriculaProfesional" class="text-danger"></span>
-            </div>
+                <!-- Matricula -->
+                <div class="form-group mt-3">
+                    <label asp-for="MatriculaProfesional" class="control-label">DNI</label>
+                    <input asp-for="MatriculaProfesional" class="form-control" placeholder="Ingrese la Matricula Profesional" />
+                    <span asp-validation-for="MatriculaProfesional" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="MailMedico" class="control-label"></label>
-                <input asp-for="MailMedico" class="form-control" />
-                <span asp-validation-for="MailMedico" class="text-danger"></span>
-            </div>
+                <!-- Email -->
+                <div class="form-group mt-3">
+                    <label asp-for="MailMedico" class="control-label">Correo Electrónico</label>
+                    <input asp-for="MailMedico" class="form-control" placeholder="Ingrese el correo electrónico" />
+                    <span asp-validation-for="MailMedico" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label class="control-label">DireccionMedico</label>
-                <div class="d-flex align-items-center">
-                    <div class="me-2">
-                        <label for="Calle" class="form-label small">Calle</label>
-                        <input asp-for="Calle" class="form-control" style="width: 150px;" placeholder="Solo letras" onkeypress="return /^[a-zA-Z\s]*$/.test(event.key)" />
-                        <span asp-validation-for="Calle" class="text-danger"></span>
-                    </div>
-                    <div>
-                        <label for="NumeroCalle" class="form-label small">NumeroCalle</label>
-                        <input asp-for="NumeroCalle" class="form-control" style="width: 100px;" placeholder="XXXX" maxlength="4" onkeypress="return /^\d*$/.test(event.key)" />
-                        <span asp-validation-for="NumeroCalle" class="text-danger"></span>
-                    </div>
-                    <div>
-                        <label for="Piso" class="form-label small">Piso</label>
-                        <select asp-for="Piso" class="form-control" style="width: 100px;">
-                            @for (int i = 1; i <= 12; i++)
-                            {
-                                <option value="@i">@i</option>
-                            }
-                        </select>
-                        <span asp-validation-for="Piso" class="text-danger"></span>
-                    </div>
-                    <div>
-                        <label for="Depto" class="form-label small">Depto</label>
-                        <select asp-for="Depto" class="form-control" style="width: 100px;">
-                            @foreach (char letter in "ABCDEFGH")
-                            {
-                                <option value="@letter">@letter</option>
-                            }
-                        </select>
-                        <span asp-validation-for="Depto" class="text-danger"></span>
-                    </div>
-                    <div>
-                        <label for="Localidad" class="form-label small">Localidad</label>
-                        <select asp-for="Localidad" class="form-control" style="width: 200px;">
-                            <option value="CABA">CABA</option>
-                            <option value="Pcia Buenos Aires">Pcia Buenos Aires</option>
-                            <option value="Otra">Otra</option>
-                        </select>
-                        <span asp-validation-for="Localidad" class="text-danger"></span>
+
+                <!-- Dirección Medico -->
+                <div class="form-group mt-3">
+                    <label class="control-label">Dirección del Médico</label>
+                    <div class="row g-2">
+                        <div class="col-md-3">
+                            <label for="Calle" class="form-label">Calle</label>
+                            <input asp-for="Calle" class="form-control" placeholder="Solo letras" onkeypress="return /^[a-zA-Z\s]*$/.test(event.key)" />
+                            <span asp-validation-for="Calle" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="NumeroCalle" class="form-label">Número</label>
+                            <input asp-for="NumeroCalle" class="form-control" placeholder="XXXX" maxlength="4" onkeypress="return /^\d*$/.test(event.key)" />
+                            <span asp-validation-for="NumeroCalle" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="Piso" class="form-label">Piso</label>
+                            <select asp-for="Piso" class="form-control">
+                                @for (int i = 1; i <= 20; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Piso" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="Depto" class="form-label">Depto</label>
+                            <select asp-for="Depto" class="form-control">
+                                @foreach (char letter in "ABCDEFGHIJKL")
+                                {
+                                    <option value="@letter">@letter</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Depto" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="Localidad" class="form-label">Localidad</label>
+                            <select asp-for="Localidad" class="form-control">
+                                <option value="CABA">CABA</option>
+                                <option value="Pcia Buenos Aires">Pcia Buenos Aires</option>
+                                <option value="Otra">Otra</option>
+                            </select>
+                            <span asp-validation-for="Localidad" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+                <!-- Botón de envío -->
+                <div class="form-group text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                        <i class="bi bi-person-plus-fill"></i> Registrar Afiliado
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <!-- Enlace para volver -->
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-outline-secondary btn-lg px-4">
+            <i class="bi bi-arrow-left-circle"></i> Volver a la lista
+        </a>
+    </div>
 
 @section Scripts {
     @{

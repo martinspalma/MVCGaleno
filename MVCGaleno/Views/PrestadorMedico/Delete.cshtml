@@ -1,57 +1,60 @@
 ﻿@model MVCGaleno.Models.PrestadorMedico
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar Prestador Medico";
 }
+<div class="container mt-5">
+    <!-- Título -->
+    <h1 class="text-center text-danger mb-4">Eliminar Prestador Medico</h1>
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>PrestadorMedico</h4>
+    <!-- Mensaje de confirmación -->
+    <h3 class="text-center text-warning">¿Estás seguro de que deseas eliminar este prestador medico?</h3>
+    <p class="text-center text-muted">Esta acción no se puede deshacer.</p>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Especialidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Especialidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreCompleto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreCompleto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MatriculaProfesional)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MatriculaProfesional)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MailMedico)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MailMedico)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TelefonoMedico)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TelefonoMedico)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DireccionMedico)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DireccionMedico)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdPrestador" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+
+
+    <!-- Detalles del prestador medico -->
+    <div class="card shadow p-4 mb-4">
+        <h4 class="text-primary">Detalles del Prestador Medico</h4>
+        <dl class="row mt-3">
+            <!-- Especialidad -->
+            <dt class="col-sm-4 text-secondary">Especialidad</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Especialidad)</dd>
+
+            <!-- Nombre Completo -->
+            <dt class="col-sm-4 text-secondary">Nombre Completo</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.NombreCompleto)</dd>
+
+            <!-- Matrícula -->
+            <dt class="col-sm-4 text-secondary">Matrícula Profesional</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.MatriculaProfesional)</dd>
+
+            <!-- Correo Electrónico -->
+            <dt class="col-sm-4 text-secondary">Correo Electrónico</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.MailMedico)</dd>
+
+            <!-- Teléfono -->
+            <dt class="col-sm-4 text-secondary">Teléfono</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.TelefonoMedico)</dd>
+
+            <!-- Dirección -->
+            <dt class="col-sm-4 text-secondary">Dirección</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.DireccionMedico)</dd>
+        </dl>
+    </div>
+
+
+    <!-- Botones de acción -->
+    <div class="text-center">
+        <form asp-action="Delete" class="d-inline">
+            <input type="hidden" asp-for="IdPrestador" />
+            <button type="submit" class="btn btn-danger btn-sm me-3">
+                <i class="bi bi-trash3"></i> Eliminar
+            </button>
+        </form>
+        <a asp-action="Index" class="btn btn-secondary btn-sm">
+            <i class="bi bi-arrow-left-circle"></i> Volver a la lista
+        </a>
+    </div>
+
 </div>
