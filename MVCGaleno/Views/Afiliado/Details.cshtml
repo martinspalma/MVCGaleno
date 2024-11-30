@@ -32,11 +32,14 @@
 
     <!-- Botones de acción -->
     <div class="text-center mt-4">
-        <a asp-action="Edit" asp-route-id="@Model?.IdAfiliado" class="btn btn-warning btn-lg me-3">
+        <!-- Botón Editar -->
+        <a asp-action="Edit" asp-route-id="@Model?.IdAfiliado" class="btn btn-primary btn-sm me-3">
             <i class="bi bi-pencil"></i> Editar
         </a>
-        <a asp-action="Index" class="btn btn-secondary btn-lg">
+        <!-- Botón Volver -->
+        <a asp-action="Index" class="btn btn-light btn-sm">
             <i class="bi bi-arrow-left-circle"></i> Volver a la lista
         </a>
     </div>
+
 </div>
