@@ -8,11 +8,10 @@
     <!-- Título principal -->
     <h1 class="text-center text-primary mb-4">Registrar Nuevo Afiliado</h1>
 
-    <!-- Breve descripción -->
     <p class="text-center text-muted">Complete los campos a continuación para agregar un nuevo afiliado al sistema.</p>
     <hr class="mb-5" />
 
-    <!-- Formulario -->
+    
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form asp-action="Create" class="card shadow p-4">
@@ -20,62 +19,56 @@
 
                 <!-- Nombre Completo -->
                 <div class="form-group">
-                    <label class="control-label">NombreCompleto</label>
-                    <div class="d-flex align-items-center">
-                        <div class="me-2">
-                            <label for="Nombre" class="form-label small"> Nombre </label>
-                            <input asp-for="Nombre" class="form-control" style="width: 100px;" />
+                    <label class="control-label">Nombre Completo</label>
+                    <div class="row g-2">
+                        <div class="col">
+                            <input asp-for="Nombre" class="form-control" placeholder="Nombre" />
                             <span asp-validation-for="Nombre" class="text-danger"></span>
                         </div>
-
-                        <div>
-                            <label for="Apellido" class="form-label small">Apellido</label>
-                            <input asp-for="Apellido" class="form-control" style="width: 150px;" />
+                        <div class="col">
+                            <input asp-for="Apellido" class="form-control" placeholder="Apellido" />
                             <span asp-validation-for="Apellido" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
 
                 <!-- DNI -->
-                <div class="form-group">
-                    <label asp-for="Dni" class="control-label font-weight-bold"></label>
+                <div class="form-group mt-3">
+                    <label asp-for="Dni" class="control-label">DNI</label>
                     <input asp-for="Dni" class="form-control" placeholder="Ingrese el DNI" />
                     <span asp-validation-for="Dni" class="text-danger"></span>
                 </div>
 
                 <!-- Tipo de Plan -->
-                <div class="form-group">
-                    <label asp-for="tipoPlan" class="control-label font-weight-bold"></label>
+                <div class="form-group mt-3">
+                    <label asp-for="tipoPlan" class="control-label">Tipo de Plan</label>
                     <select asp-for="tipoPlan" class="form-control" asp-items="Html.GetEnumSelectList<TipoPlan>()">
-                        <option selected="selected" value="">Seleccione un tipo de plan</option>
+                        <option value="" disabled selected>Seleccione un tipo de plan</option>
                     </select>
                     <span asp-validation-for="tipoPlan" class="text-danger"></span>
                 </div>
 
                 <!-- Email -->
-                <div class="form-group">
-                    <label asp-for="mail" class="control-label font-weight-bold"></label>
+                <div class="form-group mt-3">
+                    <label asp-for="mail" class="control-label">Correo Electrónico</label>
                     <input asp-for="mail" class="form-control" placeholder="Ingrese el correo electrónico" />
                     <span asp-validation-for="mail" class="text-danger"></span>
                 </div>
 
                 <!-- Teléfono -->
-                <div class="form-group">
-                    <label class="control-label">Número de Teléfono</label>
-                    <div class="d-flex align-items-center">
-                        <div class="me-2">
-                            <label for="CodigoArea" class="form-label small">Código de Área</label>
-                            <input asp-for="CodigoArea" class="form-control" style="width: 100px;" placeholder="XXX" />
+                <div class="form-group mt-3">
+                    <label class="control-label">Teléfono</label>
+                    <div class="row g-2">
+                        <div class="col-md-3">
+                            <input asp-for="CodigoArea" class="form-control" placeholder="Área (Ej: 11)" />
                             <span asp-validation-for="CodigoArea" class="text-danger"></span>
                         </div>
-                        <div>
-                            <label for="Caracteristica" class="form-label small">Caracteristica</label>
-                            <input asp-for="Caracteristica" class="form-control" style="width: 150px;" placeholder="XXXX" />
+                        <div class="col-md-4">
+                            <input asp-for="Caracteristica" class="form-control" placeholder="Característica" />
                             <span asp-validation-for="Caracteristica" class="text-danger"></span>
                         </div>
-                        <div>
-                            <label for="Numero" class="form-label small">Número</label>
-                            <input asp-for="Numero" class="form-control" style="width: 150px;" placeholder="XXXX" />
+                        <div class="col-md-5">
+                            <input asp-for="Numero" class="form-control" placeholder="Número" />
                             <span asp-validation-for="Numero" class="text-danger"></span>
                         </div>
                     </div>
@@ -83,7 +76,9 @@
 
                 <!-- Botón de envío -->
                 <div class="form-group text-center mt-4">
-                    <input type="submit" value="Registrar Afiliado" class="btn btn-primary btn-lg" />
+                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                        <i class="bi bi-person-plus-fill"></i> Registrar Afiliado
+                    </button>
                 </div>
             </form>
         </div>
@@ -91,6 +86,9 @@
 
     <!-- Enlace para volver -->
     <div class="text-center mt-4">
-        <a asp-action="Index" class="btn btn-link">← Volver a la lista</a>
+        <a asp-action="Index" class="btn btn-outline-secondary btn-lg px-4">
+            <i class="bi bi-arrow-left-circle"></i> Volver a la lista
+        </a>
     </div>
+
 </div>
