@@ -1,47 +1,38 @@
-﻿@model MVCGaleno.Models.Laboratorio
+﻿@model IEnumerable<DocumentoViewModel>
 
-@{
-    ViewData["Title"] = "Laboratorio";
-    var especialidades = Enum.GetValues(typeof(Especialidad)).Cast<Especialidad>().ToList();
-}
-
-<h2>Laboratorio - Subir Resultados de Estudios</h2>
-
-@if (ViewBag.Mensaje != null)
+@if (Model != null && Model.Any())
 {
-    <div class="alert alert-success">
-        @ViewBag.Mensaje
-    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Documento</th>
+                <th>Médico</th>
+                <th>Afiliado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var laboratorio in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@laboratorio.RutaArchivo" target="_blank">
+                            Ver Estudio
+                        </a>
+                    </td>
+                    <td>@laboratorio.MedicoNombre</td> <!-- Nombre del médico -->
+                    <td>@laboratorio.AfiliadoNombre</td> <!-- Nombre del afiliado -->
+                    <td>
+                        <!-- Aquí puedes agregar botones de acción, por ejemplo, para eliminar o ver detalles -->
+                        <a href="@Url.Action("Eliminar", new { id = laboratorio.IdLaboratorio })" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No hay documentos cargados para este médico.</p>
 }
 
-<form asp-action="SubirEstudio" asp-controller="Laboratorio" method="post" enctype="multipart/form-data">
-    <div class="mb-3">
-        <label asp-for="Especialidad" class="form-label"></label>
-        @Html.DropDownListFor(
-                 model => model.Especialidad,
-                 new SelectList(especialidades),
-                 "Seleccionar Especialidad",
-                 new { @class = "form-control" }
-                 )
-        <span asp-validation-for="Especialidad" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="PrestadorMedico" class="form-label"></label>
-        <input asp-for="PrestadorMedico" class="form-control" />
-        <span asp-validation-for="PrestadorMedico" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="ArchivoEstudio" class="form-label">Seleccionar Archivo (PDF)</label>
-        <input type="file" asp-for="ArchivoEstudio" class="form-control" />
-        <span asp-validation-for="ArchivoEstudio" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Subir Estudio</button>
-</form>
-
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

@@ -6,18 +6,22 @@ namespace MVCGaleno.Models
 {
     public class Laboratorio
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdLaboratorio { get; set; }
 
-        [Required]
-        [Display(Name = "Especialidad")]
-        public Especialidad Especialidad { get; set; }
+        [ForeignKey("PrestadorMedico")]
+        public int IdPrestador { get; set; }
 
-        [Required]
-        [Display(Name = "Prestador Médico")]
-        public string PrestadorMedico { get; set; }
+        [ForeignKey("Afiliado")]
+        public int IdAfiliado { get; set; }
 
         [Required]
         [Display(Name = "Archivo de Estudio")]
+        public string RutaArchivo { get; set; } 
+
+        [NotMapped]
         public IFormFile ArchivoEstudio { get; set; }
     }
+    
 }

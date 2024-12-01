@@ -1,0 +1,51 @@
+﻿@model MVCGaleno.Models.Laboratorio
+
+@{
+    ViewData["Title"] = "Subir Estudio";
+}
+
+<h2>Subir Estudio de Laboratorio</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<form asp-action="SubirEstudio" asp-controller="Laboratorio" method="post" enctype="multipart/form-data">
+    <!-- Seleccionar Prestador Médico -->
+    <div class="mb-3">
+        <label for="idPrestador" class="form-label">Prestador Médico</label>
+        @Html.DropDownListFor(m => m.IdPrestador, (IEnumerable<SelectListItem>)ViewBag.PrestadorList, "Seleccionar Prestador Médico", new { @class = "form-control" })
+        <span asp-validation-for="IdPrestador" class="text-danger"></span>
+    </div>
+
+    <!-- Ingresar DNI del Afiliado -->
+    <div class="mb-3">
+        <label for="dniAfiliado" class="form-label">DNI del Afiliado</label>
+        <input type="text" id="dniAfiliado" name="dniAfiliado" class="form-control" required />
+        <span class="text-danger">@ViewData["DniAfiliadoError"]</span>
+    </div>
+
+
+    <!-- Subir Archivo de Estudio -->
+    <div class="mb-3">
+        <label asp-for="ArchivoEstudio" class="form-label">Archivo de Estudio</label>
+        <input type="file" asp-for="ArchivoEstudio" class="form-control" />
+        <span asp-validation-for="ArchivoEstudio" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Subir Estudio</button>
+</form>
+
+@section Scripts {
+    @{
+        <script>
+            $(document).ready(function () {
+                // Si es necesario, se puede agregar alguna lógica de validación o interactividad aquí.
+            });
+        </script>
+    }
+}
+

@@ -4,6 +4,7 @@ using MVCGaleno.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCGaleno.Migrations
 {
     [DbContext(typeof(GalenoDatabaseContext))]
-    partial class GalenoDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20241201131743_Nueva")]
+    partial class Nueva
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,29 +79,6 @@ namespace MVCGaleno.Migrations
                     b.HasIndex("IdPrestador");
 
                     b.ToTable("Citas");
-                });
-
-            modelBuilder.Entity("MVCGaleno.Models.Laboratorio", b =>
-                {
-                    b.Property<int>("IdLaboratorio")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdLaboratorio"));
-
-                    b.Property<int>("IdAfiliado")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdPrestador")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RutaArchivo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("IdLaboratorio");
-
-                    b.ToTable("Laboratorio");
                 });
 
             modelBuilder.Entity("MVCGaleno.Models.PrestadorMedico", b =>
