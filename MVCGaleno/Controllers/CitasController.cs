@@ -48,9 +48,20 @@ namespace MVCGaleno.Controllers
         // GET: Citas/Create
         public IActionResult Create()
         {
-            ViewData["IdPrestador"] = new SelectList(_context.Medicos, "IdPrestador", "IdPrestador");
+            // Cargar los prestadores médicos
+            var prestadores = _context.Medicos
+                .Select(p => new SelectListItem
+                {
+                    Value = p.IdPrestador.ToString(),
+                    Text = p.NombreCompleto
+                })
+                .ToList();
+
+            ViewBag.IdPrestador = prestadores;
+
             return View();
         }
+
 
         // POST: Citas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.

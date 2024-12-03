@@ -241,13 +241,6 @@ namespace MVCGaleno.Controllers
 
 
 
-        // GET: LaboratorioController
-        /*
-        public ActionResult Index()
-        {
-            return View();
-        }
-        */
 
         // GET: LaboratorioController/Create
         public ActionResult Create()
@@ -292,35 +285,7 @@ namespace MVCGaleno.Controllers
             }
         }
 
-        /*/ GET: LaboratorioController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-       /* public IActionResult SubirEstudio()
-        {
-            return View(new Laboratorio());
-        }
-       */
-
-
-        // POST: LaboratorioController/Delete/5
-        /*
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-    }
-        */
+        
     }
 
 }
