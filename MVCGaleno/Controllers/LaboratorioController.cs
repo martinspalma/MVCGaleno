@@ -211,6 +211,33 @@ namespace MVCGaleno.Controllers
         }
 
 
+        public async Task<IActionResult> Details(int id)
+        {
+            var laboratorio = await _context.Laboratorio
+                .FirstOrDefaultAsync(l => l.IdLaboratorio == id);
+
+            if (laboratorio == null)
+            {
+                return NotFound();
+            }
+
+            var afiliado = await _context.Afiliados
+                .FirstOrDefaultAsync(a => a.IdAfiliado == laboratorio.IdAfiliado);
+
+            var prestador = await _context.Medicos
+                .FirstOrDefaultAsync(m => m.IdPrestador == laboratorio.IdPrestador);
+
+            var viewModel = new DetalleLaboratorioViewModel
+            {
+                IdLaboratorio = laboratorio.IdLaboratorio,
+                RutaArchivo = laboratorio.RutaArchivo,
+                AfiliadoNombre = afiliado?.NombreCompleto ?? "No asignado",
+                PrestadorNombre = prestador?.NombreCompleto ?? "No asignado"
+            };
+
+            return View(viewModel);
+        }
+
 
 
 
@@ -221,11 +248,6 @@ namespace MVCGaleno.Controllers
             return View();
         }
         */
-        // GET: LaboratorioController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: LaboratorioController/Create
         public ActionResult Create()
