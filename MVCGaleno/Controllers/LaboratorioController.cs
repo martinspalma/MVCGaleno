@@ -50,7 +50,7 @@ namespace MVCGaleno.Controllers
             ViewBag.PrestadorList = prestadores;
 
             // Validar el modelo
-           // if (!ModelState.IsValid)
+            // if (!ModelState.IsValid)
             //    return View(model);
 
             // Validar existencia del afiliado en la base de datos
@@ -175,6 +175,40 @@ namespace MVCGaleno.Controllers
         // Otros métodos del controlador...
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                // Buscar el registro en la base de datos
+                var laboratorio = await _context.Laboratorio.FindAsync(id);
+
+                if (laboratorio == null)
+                {
+                    TempData["ErrorMessage"] = "El registro no existe o ya fue eliminado.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                // Eliminar el archivo asociado, si existe
+                if (!string.IsNullOrEmpty(laboratorio.RutaArchivo) && System.IO.File.Exists(laboratorio.RutaArchivo))
+                {
+                    System.IO.File.Delete(laboratorio.RutaArchivo);
+                }
+
+                // Eliminar el registro de la base de datos
+                _context.Laboratorio.Remove(laboratorio);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Registro eliminado exitosamente.";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Error al eliminar el registro: {ex.Message}";
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
 
 
 
@@ -236,7 +270,7 @@ namespace MVCGaleno.Controllers
             }
         }
 
-        // GET: LaboratorioController/Delete/5
+        /*/ GET: LaboratorioController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
@@ -246,10 +280,10 @@ namespace MVCGaleno.Controllers
             return View(new Laboratorio());
         }
        */
-        [HttpPost]
 
 
         // POST: LaboratorioController/Delete/5
+        /*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
@@ -264,4 +298,7 @@ namespace MVCGaleno.Controllers
             }
         }
     }
+        */
+    }
+
 }
