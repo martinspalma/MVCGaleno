@@ -1,21 +1,55 @@
 ﻿@model IEnumerable<MVCGaleno.Models.Especialidad>
 @{
-    ViewData["Title"] = "Select Specialty";
+    ViewData["Title"] = "Selecciona Especialidad";
 }
 
-<h2>Select Specialty</h2>
+<div class="container mt-5">
+    <!-- Título -->
+    <h1 class="text-center text-primary mb-4">Seleccionar Especialidad</h1>
 
-<form asp-action="SelectSpecialty" method="post">
-    <div class="form-group">
-        <label for="especialidad">Especialidad</label>
-        <select id="especialidad" name="especialidad" class="form-control">
-            <option value="">Please select</option>
-            @foreach (var specialty in Model)
-            {
-                <option value="@specialty">@specialty</option>
-            }
-        </select>
+    <!-- Formulario en Card -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="SelectSpecialty" method="post">
+                <!-- Especialidad -->
+                <div class="mb-4">
+                    <label for="especialidad" class="form-label fw-bold">Especialidad</label>
+                    <select id="especialidad" name="especialidad" class="form-select" aria-label="Seleccionar especialidad" required>
+                        <option value="" disabled selected>Selecciona una especialidad</option>
+                        @foreach (var specialty in Model)
+                        {
+                            <option value="@specialty">@specialty</option>
+                        }
+                    </select>
+                    <div class="form-text text-danger" id="error-message" style="display:none;">
+                        Por favor, selecciona una especialidad válida.
+                    </div>
+                </div>
+
+                <!-- Botón de Envío -->
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-arrow-right-circle"></i> Siguiente
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Next</button>
-</form>
+</div>
 
+<!-- Script de validación opcional -->
+@section Scripts {
+    <script>
+        document.querySelector("form").addEventListener("submit", function (event) {
+            const selectElement = document.getElementById("especialidad");
+            const errorMessage = document.getElementById("error-message");
+
+            if (!selectElement.value) {
+                errorMessage.style.display = "block";
+                event.preventDefault();
+            } else {
+                errorMessage.style.display = "none";
+            }
+        });
+    </script>
+}

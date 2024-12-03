@@ -1,22 +1,55 @@
 ﻿@model IEnumerable<MVCGaleno.Models.PrestadorMedico>
-
 @{
-    ViewData["Title"] = "Select Medico";
+    ViewData["Title"] = "Seleccionar Médico";
 }
 
-<h2>Select Medico</h2>
+<div class="container mt-5">
+    <!-- Título -->
+    <h1 class="text-center text-primary mb-4">Seleccionar Médico</h1>
 
-<form asp-action="SelectMedico" method="post">
-    <div class="form-group">
-        <label for="idPrestador">Médico</label>
-        <select id="idPrestador" name="idPrestador" class="form-control">
-            <option value="">Please select</option>
-            @foreach (var medico in Model)
-            {
-                <option value="@medico.IdPrestador">@medico.NombreCompleto</option>
-            }
-        </select>
+    <!-- Formulario en Card -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="SelectMedico" method="post">
+                <!-- Médico -->
+                <div class="mb-4">
+                    <label for="idPrestador" class="form-label fw-bold">Médico</label>
+                    <select id="idPrestador" name="idPrestador" class="form-select" aria-label="Seleccionar médico" required>
+                        <option value="" disabled selected>Selecciona un médico</option>
+                        @foreach (var medico in Model)
+                        {
+                            <option value="@medico.IdPrestador">@medico.NombreCompleto</option>
+                        }
+                    </select>
+                    <div class="form-text text-danger" id="error-message" style="display:none;">
+                        Por favor, selecciona un médico válido.
+                    </div>
+                </div>
+
+                <!-- Botón de Envío -->
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-arrow-right-circle"></i> Siguiente
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Next</button>
-</form>
+</div>
 
+<!-- Script de validación opcional -->
+@section Scripts {
+    <script>
+        document.querySelector("form").addEventListener("submit", function (event) {
+            const selectElement = document.getElementById("idPrestador");
+            const errorMessage = document.getElementById("error-message");
+
+            if (!selectElement.value) {
+                errorMessage.style.display = "block";
+                event.preventDefault();
+            } else {
+                errorMessage.style.display = "none";
+            }
+        });
+    </script>
+}

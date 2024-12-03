@@ -13,14 +13,12 @@
     <div class="card shadow p-4">
         <h4 class="text-secondary mb-4">Información</h4>
         <dl class="row">
-            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.fechaCita)</dt>
+            <dt class="col-sm-4 text-muted">Fecha del Turno</dt>
             <dd class="col-sm-8">@Html.DisplayFor(model => model.fechaCita)</dd>
 
-            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.estaDisponible)</dt>
+            <dt class="col-sm-4 text-muted">Disponibilidad</dt>
             <dd class="col-sm-8">@Html.DisplayFor(model => model.estaDisponible)</dd>
-
-            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.PrestadorMedico)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.PrestadorMedico.IdPrestador)</dd>
+        </dl>
     </div>
 
     <!-- Boton de acción -->

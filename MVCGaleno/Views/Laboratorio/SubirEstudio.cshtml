@@ -4,48 +4,59 @@
     ViewData["Title"] = "Subir Estudio";
 }
 
-<h2>Subir Estudio de Laboratorio</h2>
+<div class="container mt-5">
+    <!-- Título -->
+    <h2 class="text-center text-primary mb-4">Subir Estudio de Laboratorio</h2>
 
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["SuccessMessage"]
+    <!-- Mensaje de éxito -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Formulario -->
+    <div class="card shadow-sm rounded">
+        <div class="card-body">
+            <form asp-action="SubirEstudio" asp-controller="Laboratorio" method="post" enctype="multipart/form-data">
+                <!-- Seleccionar Prestador Médico -->
+                <div class="mb-4">
+                    <label for="idPrestador" class="form-label fw-bold">Prestador Médico</label>
+                    @Html.DropDownListFor(m => m.IdPrestador, (IEnumerable<SelectListItem>)ViewBag.PrestadorList, "Seleccionar Prestador Médico", new { @class = "form-select" })
+                    <span asp-validation-for="IdPrestador" class="text-danger"></span>
+                </div>
+
+                <!-- Ingresar DNI del Afiliado -->
+                <div class="mb-4">
+                    <label for="dniAfiliado" class="form-label fw-bold">DNI del Afiliado</label>
+                    <input type="text" id="dniAfiliado" name="dniAfiliado" class="form-control" placeholder="Ingrese el DNI del afiliado" required />
+                    <span class="text-danger">@ViewData["DniAfiliadoError"]</span>
+                </div>
+
+                <!-- Subir Archivo de Estudio -->
+                <div class="mb-4">
+                    <label asp-for="ArchivoEstudio" class="form-label fw-bold">Archivo de Estudio</label>
+                    <input type="file" asp-for="ArchivoEstudio" class="form-control" />
+                    <span asp-validation-for="ArchivoEstudio" class="text-danger"></span>
+                </div>
+
+                <!-- Botón de Envío -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg px-4">
+                        <i class="bi bi-cloud-upload-fill me-2"></i> Subir Estudio
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-}
-
-<form asp-action="SubirEstudio" asp-controller="Laboratorio" method="post" enctype="multipart/form-data">
-    <!-- Seleccionar Prestador Médico -->
-    <div class="mb-3">
-        <label for="idPrestador" class="form-label">Prestador Médico</label>
-        @Html.DropDownListFor(m => m.IdPrestador, (IEnumerable<SelectListItem>)ViewBag.PrestadorList, "Seleccionar Prestador Médico", new { @class = "form-control" })
-        <span asp-validation-for="IdPrestador" class="text-danger"></span>
-    </div>
-
-    <!-- Ingresar DNI del Afiliado -->
-    <div class="mb-3">
-        <label for="dniAfiliado" class="form-label">DNI del Afiliado</label>
-        <input type="text" id="dniAfiliado" name="dniAfiliado" class="form-control" required />
-        <span class="text-danger">@ViewData["DniAfiliadoError"]</span>
-    </div>
-
-
-    <!-- Subir Archivo de Estudio -->
-    <div class="mb-3">
-        <label asp-for="ArchivoEstudio" class="form-label">Archivo de Estudio</label>
-        <input type="file" asp-for="ArchivoEstudio" class="form-control" />
-        <span asp-validation-for="ArchivoEstudio" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Subir Estudio</button>
-</form>
+</div>
 
 @section Scripts {
-    @{
-        <script>
-            $(document).ready(function () {
-                // Si es necesario, se puede agregar alguna lógica de validación o interactividad aquí.
-            });
-        </script>
-    }
+    <script>
+        $(document).ready(function () {
+            // Si es necesario, se puede agregar lógica adicional aquí.
+        });
+    </script>
 }
-

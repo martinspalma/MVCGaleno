@@ -1,0 +1,43 @@
+﻿@model MVCGaleno.Models.Laboratorio
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container mt-5">
+    <!-- Título -->
+    <h1 class="text-center text-danger mb-4">Eliminar Estudio</h1>
+
+    <!-- Mensaje de confirmación -->
+    <h3 class="text-center text-warning">¿Estás seguro de que deseas eliminar este estudio?</h3>
+    <p class="text-center text-muted">Esta acción no se puede deshacer.</p>
+    <hr />
+
+    <!-- Detalles del estudio -->
+    <div class="card shadow p-4 mb-4">
+        <h4 class="text-primary">Detalles del Estudio</h4>
+        <dl class="row mt-3">
+            <dt class="col-sm-4 text-secondary">@Html.DisplayNameFor(model => model.RutaArchivo)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.RutaArchivo)</dd>
+
+            <dt class="col-sm-4 text-secondary">@Html.DisplayNameFor(model => model.IdPrestador)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.IdPrestador)</dd>
+
+            <dt class="col-sm-4 text-secondary">@Html.DisplayNameFor(model => model.IdAfiliado)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.IdAfiliado)</dd>
+
+        </dl>
+    </div>
+    <!-- Botones de acción -->
+    <div class="text-center">
+        <form asp-action="Delete" class="d-inline">
+            <input type="hidden" asp-for="IdLaboratorio" />
+            <button type="submit" class="btn btn-danger btn-sm me-3">
+                <i class="bi bi-trash3"></i> Eliminar
+            </button>
+        </form>
+        <a asp-action="Index" class="btn btn-secondary btn-sm">
+            <i class="bi bi-arrow-left-circle"></i> Volver a la lista
+        </a>
+    </div>
+</div>

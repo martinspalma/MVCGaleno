@@ -4,24 +4,32 @@
     ViewData["Title"] = "Confirm Turno";
 }
 
-<h2>Confirm Turno</h2>
+<div class="container mt-5">
+    <h2 class="text-center text-primary mb-4">Confirmar Turno</h2>
 
-@if (!ViewData.ModelState.IsValid)
-{
-    <div class="alert alert-danger">
-        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-        {
-            <p>@error.ErrorMessage</p>
-        }
-    </div>
-}
-
-<form asp-action="ConfirmTurno" method="post">
-    <input type="hidden" asp-for="IdCita" />
-    <div class="form-group">
-        <label asp-for="Dni"></label>
-        <input asp-for="Dni" class="form-control" />
-        <span asp-validation-for="Dni" class="text-danger"></span>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
         </div>
-    <button type="submit" class="btn btn-primary">Confirm</button>
-</form>
+    }
+
+    <form asp-action="ConfirmTurno" method="post" class="shadow-sm p-4 rounded bg-light">
+        <input type="hidden" asp-for="IdCita" />
+
+        <div class="mb-3">
+            <label asp-for="Dni" class="form-label fw-bold">DNI</label>
+            <input asp-for="Dni" class="form-control" />
+            <span asp-validation-for="Dni" class="text-danger"></span>
+        </div>
+
+        <div class="text-end mt-4">
+            <button type="submit" class="btn btn-primary">
+                Confirmar
+            </button>
+        </div>
+    </form>
+</div>

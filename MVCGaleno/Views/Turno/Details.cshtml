@@ -1,58 +1,46 @@
 ﻿@model MVCGaleno.Models.Turno
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Turno</h4>
+<div class="container mt-5">
+    <!-- Título Principal -->
+    <h1 class="text-center text-primary mb-4">Detalles del Turno</h1>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PrestadorMedico)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PrestadorMedico.NombreCompleto)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Especialidad)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Especialidad)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.fechaCita)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.fechaCita)
-        </dd>
-</div>
 
-        <h5>Datos de contacto</h5>
-<div>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PrestadorMedico.MailMedico)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PrestadorMedico.MailMedico)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PrestadorMedico.TelefonoMedico)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PrestadorMedico.TelefonoMedico)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PrestadorMedico.DireccionMedico)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PrestadorMedico.DireccionMedico)
-        </dd>
-    </dl>
-</div>
-<div>
-    
-    <a asp-action="Index">Back to List</a>
+    <!-- Tarjeta de información -->
+    <div class="card shadow p-4">
+        <h4 class="text-secondary mb-4">Información del Turno</h4>
+        <dl class="row">
+            <dt class="col-sm-4 text-muted">Médico</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.PrestadorMedico.NombreCompleto)</dd>
+
+            <dt class="col-sm-4 text-muted">Especialidad</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Especialidad)</dd>
+
+            <dt class="col-sm-4 text-muted">Fecha del Turno</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.fechaCita)</dd>
+        </dl>
+
+        <!-- Datos de Contacto -->
+        <h4 class="text-secondary mb-4">Datos de Contacto</h4>
+        <dl class="row">
+            <dt class="col-sm-4 text-muted">Correo Electrónico</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.PrestadorMedico.MailMedico)</dd>
+
+            <dt class="col-sm-4 text-muted">Teléfono</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.PrestadorMedico.TelefonoMedico)</dd>
+
+            <dt class="col-sm-4 text-muted">Dirección</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.PrestadorMedico.DireccionMedico)</dd>
+        </dl>
+    </div>
+
+    <!-- Botón para regresar -->
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-light btn-sm">
+            <i class="bi bi-arrow-left-circle"></i> Volver a la lista
+        </a>
+    </div>
 </div>

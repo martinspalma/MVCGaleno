@@ -1,43 +1,53 @@
 ﻿@model MVCGaleno.Models.TurnoViewModel
+
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Turno";
 }
 
-<h2>Create</h2>
+<div class="container mt-5">
+    <h2 class="text-center text-primary mb-4">Crear Turno</h2>
 
-<form asp-action="Create2">
-    <div class="form-horizontal">
-        <h4>Turno</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input asp-for="IdCita" type="hidden" />
-        <div class="form-group">
-            <label asp-for="IdAfiliado" class="control-label"></label>
+    <form asp-action="Create2" class="shadow-sm p-4 rounded bg-light">
+
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger d-none"></div>
+
+
+        <div class="mb-3">
+            <input asp-for="IdCita" type="hidden" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="IdAfiliado" class="form-label fw-bold">Afiliado</label>
             <input asp-for="IdAfiliado" class="form-control" readonly />
             <span asp-validation-for="IdAfiliado" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
-            <label asp-for="IdPrestador" class="control-label"></label>
+        <div class="mb-3">
+            <label asp-for="IdPrestador" class="form-label fw-bold">Prestador</label>
             <input asp-for="IdPrestador" class="form-control" readonly />
             <span asp-validation-for="IdPrestador" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label asp-for="Especialidad" class="control-label"></label>
+
+        <div class="mb-3">
+            <label asp-for="Especialidad" class="form-label fw-bold">Especialidad</label>
             <input asp-for="Especialidad" class="form-control" readonly />
             <span asp-validation-for="Especialidad" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label asp-for="FechaCita" class="control-label"></label>
+
+        <div class="mb-3">
+            <label asp-for="FechaCita" class="form-label fw-bold">Fecha de Cita</label>
             <input asp-for="FechaCita" class="form-control" readonly />
             <span asp-validation-for="FechaCita" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </div>
-    </div>
-</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+        <div class="text-end mt-4">
+            <input type="submit" value="Crear" class="btn btn-primary" />
+        </div>
+    </form>
+
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-link text-decoration-none text-secondary">
+            <i class="bi bi-arrow-left-circle"></i> Volver a la lista
+        </a>
+    </div>
 </div>
