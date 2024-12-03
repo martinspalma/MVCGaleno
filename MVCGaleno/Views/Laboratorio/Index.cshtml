@@ -8,7 +8,7 @@
                 <th>Documento</th>
                 <th>Médico</th>
                 <th>Afiliado</th>
-                <th>Acciones</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -20,11 +20,11 @@
                             Ver Estudio
                         </a>
                     </td>
-                    <td>@laboratorio.MedicoNombre</td> <!-- Nombre del médico -->
-                    <td>@laboratorio.AfiliadoNombre</td> <!-- Nombre del afiliado -->
+                    <td>@laboratorio.MedicoNombre</td> 
+                    <td>@laboratorio.AfiliadoNombre</td> 
                     <td>
-                        <!-- Aquí puedes agregar botones de acción, por ejemplo, para eliminar o ver detalles -->
-                        <a href="@Url.Action("Eliminar", new { id = laboratorio.IdLaboratorio })" class="btn btn-danger">Eliminar</a>
+                       
+                       
                     </td>
                 </tr>
             }

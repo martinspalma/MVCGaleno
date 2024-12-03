@@ -86,13 +86,7 @@ namespace MVCGaleno.Controllers
                 ModelState.AddModelError("", "Cita no disponible.");
                 return View(model);
             }
-            /*else
-            {
-                cita.estaDisponible = false;
-
-                _context.SaveChangesAsync();
-            }
-            */
+            
             var prestadorMedico = _context.Medicos.FirstOrDefault(m => m.IdPrestador == cita.IdPrestador);
             if (prestadorMedico == null)
             {
@@ -124,14 +118,15 @@ namespace MVCGaleno.Controllers
         }
 
         // POST: Turno/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create2(TurnoViewModel turnoViewModel)
         {
             if (ModelState.IsValid)
             {
+                var cita = _context.Citas.FirstOrDefault(m => m.IdCita == turnoViewModel.IdCita);
+                cita.estaDisponible = false;
                 var turno = new Turno
                 {
                     fechaCita = DateTime.Parse(turnoViewModel.FechaCita),
@@ -139,6 +134,7 @@ namespace MVCGaleno.Controllers
                     Afiliado = _context.Afiliados.FirstOrDefault(a => a.IdAfiliado == turnoViewModel.IdAfiliado),
                     Especialidad = turnoViewModel.Especialidad
                 };
+
 
                 _context.Add(turno);
                 await _context.SaveChangesAsync();
