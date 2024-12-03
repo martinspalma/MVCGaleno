@@ -65,7 +65,7 @@
 
                 <!-- Matricula -->
                 <div class="form-group mt-3">
-                    <label asp-for="MatriculaProfesional" class="control-label">DNI</label>
+                    <label asp-for="MatriculaProfesional" class="control-label">Matricula Profesional</label>
                     <input asp-for="MatriculaProfesional" class="form-control" placeholder="Ingrese la Matricula Profesional" />
                     <span asp-validation-for="MatriculaProfesional" class="text-danger"></span>
                 </div>
@@ -124,22 +124,20 @@
                     </div>
                 </div>
 
-                <!-- Botón de envío -->
+                <!-- Botón de Envío -->
                 <div class="form-group text-center mt-4">
-                    <button type="submit" class="btn btn-primary btn-lg px-5">
-                        <i class="bi bi-person-plus-fill"></i> Registrar Afiliado
+                    <button type="submit" class="btn btn-primary btn-sm px-3">
+                        <i class="bi bi-person-plus-fill"></i> Registrar Prestador
                     </button>
                 </div>
-            </form>
-        </div>
-    </div>
 
-    <!-- Enlace para volver -->
-    <div class="text-center mt-4">
-        <a asp-action="Index" class="btn btn-outline-secondary btn-lg px-4">
-            <i class="bi bi-arrow-left-circle"></i> Volver a la lista
-        </a>
-    </div>
+                <!-- Enlace para Volver -->
+                <div class="text-center mt-4">
+                    <a asp-action="Index" class="btn btn-outline-secondary btn-sm px-3">
+                        <i class="bi bi-arrow-left-circle"></i> Volver a la lista
+                    </a>
+                </div>
+</form>
 
 @section Scripts {
     @{
