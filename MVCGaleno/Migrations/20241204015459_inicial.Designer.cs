@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCGaleno.Migrations
 {
     [DbContext(typeof(GalenoDatabaseContext))]
-    [Migration("20241201134403_Lab")]
-    partial class Lab
+    [Migration("20241204015459_inicial")]
+    partial class inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

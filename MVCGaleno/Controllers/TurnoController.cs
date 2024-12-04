@@ -86,7 +86,7 @@ namespace MVCGaleno.Controllers
                 ModelState.AddModelError("", "Cita no disponible.");
                 return View(model);
             }
-            
+
             var prestadorMedico = _context.Medicos.FirstOrDefault(m => m.IdPrestador == cita.IdPrestador);
             if (prestadorMedico == null)
             {
@@ -99,10 +99,12 @@ namespace MVCGaleno.Controllers
             {
                 IdCita = model.IdCita,
                 IdAfiliado = afiliado.IdAfiliado,
+                NombreAfiliado = afiliado.NombreCompleto,
                 IdPrestador = prestadorMedico.IdPrestador,
+                NombrePrestador = prestadorMedico.NombreCompleto,
                 Especialidad = prestadorMedico.Especialidad,
                 FechaCita = cita.fechaCita.ToString("dd/MM/yy HH:mm")
-                
+
 
             };
             return RedirectToAction("Create", turnoViewModel);
@@ -114,11 +116,13 @@ namespace MVCGaleno.Controllers
         // GET: Turno/Create
         public IActionResult Create(TurnoViewModel turnoViewModel)
         {
+
             return View(turnoViewModel);
         }
 
+
         // POST: Turno/Create
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create2(TurnoViewModel turnoViewModel)
@@ -142,7 +146,7 @@ namespace MVCGaleno.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(turnoViewModel);
+            return View("Create", turnoViewModel);
         }
 
 

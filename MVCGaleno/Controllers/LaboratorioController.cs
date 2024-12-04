@@ -82,7 +82,7 @@ namespace MVCGaleno.Controllers
                 }
 
                 // Definir la ruta absoluta de almacenamiento
-                var uploadDirectory = Path.Combine(@"C:\Users\marti\OneDrive\Desktop\uploads");
+                var uploadDirectory = Path.Combine(@"C:\Users\Andrea Massun Sovic\Desktop\PNT");
                 if (!Directory.Exists(uploadDirectory))
                 {
                     Directory.CreateDirectory(uploadDirectory); // Crear la carpeta si no existe

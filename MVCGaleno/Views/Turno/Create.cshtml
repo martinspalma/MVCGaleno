@@ -14,18 +14,20 @@
 
         <div class="mb-3">
             <input asp-for="IdCita" type="hidden" />
+            <input asp-for="IdAfiliado" type="hidden" />
+            <input asp-for="IdPrestador" type="hidden" />
+            <input asp-for="NombreAfiliado" type="hidden" />
+            <input asp-for="NombrePrestador" type="hidden" />
         </div>
 
         <div class="mb-3">
-            <label asp-for="IdAfiliado" class="form-label fw-bold">Afiliado</label>
-            <input asp-for="IdAfiliado" class="form-control" readonly />
-            <span asp-validation-for="IdAfiliado" class="text-danger"></span>
+            <label class="form-label fw-bold">Afiliado</label>
+            <input type="text" class="form-control" value="@Model.NombreAfiliado" readonly />
         </div>
 
         <div class="mb-3">
-            <label asp-for="IdPrestador" class="form-label fw-bold">Prestador</label>
-            <input asp-for="IdPrestador" class="form-control" readonly />
-            <span asp-validation-for="IdPrestador" class="text-danger"></span>
+            <label class="form-label fw-bold">Prestador</label>
+            <input type="text" class="form-control" value="@Model.NombrePrestador" readonly />
         </div>
 
         <div class="mb-3">
