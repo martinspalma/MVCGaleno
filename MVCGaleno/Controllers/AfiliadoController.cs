@@ -59,7 +59,8 @@ namespace MVCGalenos.Controllers
         {
             if (ModelState.IsValid)
             {
-                var telefonoCompleto = $"({model.CodigoArea}) {model.Caracteristica} - {model.Numero}";
+                var codigoArea = model.CodigoArea.PadLeft(3, '0');
+                var telefonoCompleto = $"({codigoArea}) {model.Caracteristica} - {model.Numero}";
                 var NombreCompleto = $"{model.Apellido}, {model.Nombre}";
                 var afiliado = new Afiliado
                 {
@@ -125,7 +126,7 @@ namespace MVCGalenos.Controllers
 
             if (ModelState.IsValid)
             {
-                var telefonoCompleto = $"({model.CodigoArea}) {model.Caracteristica} - {model.Numero}";
+                var telefonoCompleto = $"({model.CodigoArea.PadLeft(3, '0')}) {model.Caracteristica} - {model.Numero}";
                 var NombreCompleto = $" {model.Apellido}, {model.Nombre}";
 
                     afiliado.tipoPlan = model.tipoPlan;
