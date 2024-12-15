@@ -72,14 +72,39 @@ namespace MVCGaleno.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Acá se verifica que no exista otra cita con los mismos datos
+                var citaDuplicada = await _context.Citas.AnyAsync(c => c.fechaCita == cita.fechaCita && c.IdPrestador == cita.IdPrestador);
+
+                if (citaDuplicada)
+                {
+                    // En caso de que exista:
+                    ModelState.AddModelError("", "La cita ya existe");
+
+                    ViewData["IdPrestador"] = new SelectList(
+                         _context.Medicos,
+                          "IdPrestador",
+                          "NombreCompleto",
+                          cita.IdPrestador
+                    );
+                    return View(cita); 
+                }
+
+                // Si no existe, se crea una nueva cita
                 _context.Add(cita);
                 await _context.SaveChangesAsync();
-
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdPrestador"] = new SelectList(_context.Medicos, "IdPrestador", "IdPrestador", cita.IdPrestador);
-            return View(cita);
+
+            ViewData["IdPrestador"] = new SelectList(
+              _context.Medicos,
+              "IdPrestador",
+              "NombreCompleto",
+              cita.IdPrestador
+            );
+
+            return View(cita); 
         }
+
 
         // GET: Citas/Edit/5
         public async Task<IActionResult> Edit(int? id)
