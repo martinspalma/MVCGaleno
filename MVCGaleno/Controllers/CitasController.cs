@@ -95,12 +95,7 @@ namespace MVCGaleno.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["IdPrestador"] = new SelectList(
-              _context.Medicos,
-              "IdPrestador",
-              "NombreCompleto",
-              cita.IdPrestador
-            );
+            ViewData["IdPrestador"] = GetListaDePrestadores(cita.IdPrestador);
 
             return View(cita); 
         }
@@ -119,7 +114,8 @@ namespace MVCGaleno.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdPrestador"] = new SelectList(_context.Medicos, "IdPrestador", "IdPrestador", cita.IdPrestador);
+           
+            ViewData["IdPrestador"] = GetListaDePrestadores(cita.IdPrestador);
             return View(cita);
         }
 
@@ -155,7 +151,7 @@ namespace MVCGaleno.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdPrestador"] = new SelectList(_context.Medicos, "IdPrestador", "IdPrestador", cita.IdPrestador);
+            ViewData["IdPrestador"] = GetListaDePrestadores(cita.IdPrestador);
             return View(cita);
         }
 
@@ -197,6 +193,12 @@ namespace MVCGaleno.Controllers
         {
             return _context.Citas.Any(e => e.IdCita == id);
         }
+
+        private SelectList GetListaDePrestadores(int? selectedId = null)
+        {
+            return new SelectList(_context.Medicos, "IdPrestador", "NombreCompleto", selectedId);
+        }
+
 
     }
 }
